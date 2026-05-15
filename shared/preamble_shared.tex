@@ -41,6 +41,10 @@
 
 %% — Grafica e ornamenti —
 \usepackage{graphicx}
+%% Each edition's main file lives in it/ or en/, but shared assets like
+%% the cover logo sit at the repo root. Search the parent dir as well as
+%% the current one so \includegraphics works regardless of cwd.
+\graphicspath{{../}{./}}
 \usepackage{tikz}
 \usetikzlibrary{calc}
 \usepackage{pgfornament}
