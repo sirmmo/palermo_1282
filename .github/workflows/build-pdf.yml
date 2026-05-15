@@ -26,10 +26,26 @@ jobs:
           cd /tmp/gfonts
           git sparse-checkout set ofl/ebgaramond ofl/cinzel ofl/cinzeldecorative
           install -d /usr/share/fonts/truetype/google
-          find ofl/ebgaramond ofl/cinzel ofl/cinzeldecorative \
-            -type f -name '*.ttf' -exec cp {} /usr/share/fonts/truetype/google/ \;
+          # Install only STATIC fonts (skip variable [wght] files) so
+          # fontspec's `*-Regular`/`*-Bold`/`*-Italic`/`*-BoldItalic`
+          # lookups resolve to discrete faces.
+          for fam in ebgaramond cinzel cinzeldecorative; do
+            dir="ofl/$fam"
+            src="$dir/static"
+            [ -d "$src" ] || src="$dir"
+            find "$src" -maxdepth 1 -type f -name '*.ttf' ! -name '*[[]wght[]]*' \
+              -exec cp {} /usr/share/fonts/truetype/google/ \;
+          done
           fc-cache -fv
-          fc-list | grep -iE 'garamond|cinzel' || (echo "Required fonts missing"; exit 1)
+          echo "--- registered faces ---"
+          fc-list : family style file | grep -iE 'garamond|cinzel' | sort
+          for face in 'EB Garamond:style=Regular' 'EB Garamond:style=Bold' \
+                      'EB Garamond:style=Italic' 'EB Garamond:style=Bold Italic' \
+                      'Cinzel:style=Regular' 'Cinzel:style=Bold' \
+                      'Cinzel Decorative:style=Regular' 'Cinzel Decorative:style=Bold'; do
+            fc-match "$face" | grep -qiE 'garamond|cinzel' \
+              || (echo "Missing face: $face"; exit 1)
+          done
 
       - name: Build Italian manual
         working-directory: it
