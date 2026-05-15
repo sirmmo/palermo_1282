@@ -83,3 +83,20 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: out/*.pdf
+
+      - name: Publish to itch.io
+        if: github.event_name == 'release'
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          set -eux
+          apt-get install -y --no-install-recommends curl unzip
+          curl -sSL -o /tmp/butler.zip \
+            https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default
+          unzip -o /tmp/butler.zip -d /usr/local/bin
+          chmod +x /usr/local/bin/butler
+          butler -V
+          butler push out/vespri_1282_it.pdf     sirmmo/palermo-1282:manual-it --userversion "$TAG"
+          butler push out/vespri_1282_en.pdf     sirmmo/palermo-1282:manual-en --userversion "$TAG"
+          butler push out/vespri_1282_schede.pdf sirmmo/palermo-1282:sheets    --userversion "$TAG"
