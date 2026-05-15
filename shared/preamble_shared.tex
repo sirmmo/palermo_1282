@@ -5,24 +5,18 @@
 %% ============================================================
 
 %% — Font —
+%% The *-Style filename shorthand (UprightFont=*-Regular, …) breaks for
+%% families whose name contains a space when the on-disk files have no
+%% space (EBGaramond-*.ttf, CinzelDecorative-*.ttf). Letting fontspec
+%% auto-detect Bold/Italic/Bold Italic via fontconfig family lookup is
+%% portable across local installs and CI.
 \usepackage{fontspec}
 \setmainfont{EB Garamond}[
-  Ligatures      = TeX,
-  Numbers        = OldStyle,
-  UprightFont    = *-Regular,
-  BoldFont       = *-Bold,
-  ItalicFont     = *-Italic,
-  BoldItalicFont = *-BoldItalic
+  Ligatures = TeX,
+  Numbers   = OldStyle
 ]
-\newfontfamily\cinzel{Cinzel}[
-  Ligatures   = TeX,
-  UprightFont = *-Regular,
-  BoldFont    = *-Bold
-]
-\newfontfamily\cinzeldeco{Cinzel Decorative}[
-  UprightFont = *-Regular,
-  BoldFont    = *-Bold
-]
+\newfontfamily\cinzel{Cinzel}[Ligatures = TeX]
+\newfontfamily\cinzeldeco{Cinzel Decorative}
 
 %% — Microtipia —
 \usepackage{microtype}
