@@ -121,9 +121,12 @@
   skipabove=8pt, skipbelow=8pt,
 ]{gmnote}
 
-\newcommand{\nota}[2][Nota per il GM - #1]{%
+%% \nota accepts three call shapes (the title is currently not rendered,
+%% kept as a source-side label for the author):
+%%   \nota[Title]{Body}   \nota{Title}{Body}   \nota{Body}
+\NewDocumentCommand{\nota}{O{} m g}{%
   \begin{gmnote}%
-    {\cinzel\small\color{bordoscuro} #2}\par\smallskip%
+    {\cinzel\small\color{bordoscuro}\IfValueTF{#3}{#3}{#2}}%
   \end{gmnote}%
 }
 
