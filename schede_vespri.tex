@@ -1,0 +1,687 @@
+%% ============================================================
+%% schede_vespri.tex — Schede personaggio Vespri 1282
+%% 28 schede A4 · XeLaTeX
+%% ============================================================
+\documentclass[12pt]{article}
+
+\usepackage{fontspec}
+\setmainfont{EB Garamond}[Ligatures=TeX,UprightFont=*-Regular,BoldFont=*-Bold,ItalicFont=*-Italic]
+\newfontfamily\cinzel{Cinzel}[UprightFont=*-Regular,BoldFont=*-Bold]
+\newfontfamily\cinzeldeco{Cinzel Decorative}[UprightFont=*-Regular]
+
+\usepackage[a4paper,top=13mm,bottom=11mm,left=13mm,right=13mm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{mdframed}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{pgffor}
+
+%% Colori
+\definecolor{oro}{HTML}{B8860B}
+\definecolor{ororosso}{HTML}{C47B1A}
+\definecolor{pergamena}{HTML}{F5EDD6}
+\definecolor{bordoscuro}{HTML}{7A5C1E}
+\definecolor{testoscuro}{HTML}{2A1F0A}
+\definecolor{grigionote}{HTML}{5A4A2A}
+\definecolor{sfondo}{HTML}{FDFAF3}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+%% ---- PRIMITIVI ----
+
+\newcommand{\cerchio}{\tikz[baseline=-1pt]\draw[bordoscuro,line width=0.6pt](0,0)circle(4pt);\,}
+\newcommand{\cerchiooro}{\tikz[baseline=-1pt]\fill[oro](0,0)circle(3.5pt);\,}
+\newcommand{\cerchiovuoto}{\tikz[baseline=-1pt]\draw[oro!50,line width=0.5pt](0,0)circle(3.5pt);\,}
+\newcommand{\cerchioross}{\tikz[baseline=-1pt]\draw[ororosso,line width=0.6pt](0,0)circle(4pt);\,}
+
+\newcommand{\rating}[1]{%
+  \foreach \i in {1,2,3}{%
+    \ifnum\i>#1\cerchiovuoto\else\cerchiooro\fi}%
+}
+
+\newcommand{\linea}{\vspace{1.5pt}{\color{oro}\rule{\linewidth}{0.5pt}}\vspace{1.5pt}\\}
+\newcommand{\lineafine}{\vspace{1pt}{\color{oro!40}\rule{\linewidth}{0.3pt}}\vspace{1pt}\\}
+
+\newcommand{\azione}[2]{\makebox[1.7cm][l]{\rating{#2}}{\small\color{testoscuro} #1}\\[0.5pt]}
+
+\newcommand{\boxtrauma}[1]{%
+  \begin{tikzpicture}[baseline=-1pt]
+    \draw[bordoscuro,line width=0.5pt,rounded corners=2pt](0,0)rectangle(3.1cm,0.52cm);
+    \node[anchor=west,font=\fontsize{7.5}{9}\selectfont\color{grigionote}]at(0.08cm,0.26cm){#1};
+  \end{tikzpicture}}
+
+%% ---- AMBIENTE SCHEDA ----
+%% #1 fazione IT  #2 fazione EN  #3 colore
+%% #4 nome playbook IT  #5 nome playbook EN
+%% #6 nome storico personaggio  #7 citazione
+
+\newenvironment{scheda}[7]{%
+  %% \pagecolor{sfondo}%
+  \begin{tikzpicture}[remember picture,overlay]
+    \draw[oro,line width=1pt,rounded corners=3pt]
+      ($(current page.north west)+(6mm,-6mm)$)
+      rectangle($(current page.south east)+(-6mm,6mm)$);
+    \fill[#3!18]($(current page.north west)+(6mm,-6mm)$)
+      rectangle($(current page.north east)+(-6mm,-24mm)$);
+    \draw[#3!60,line width=0.5pt]
+      ($(current page.north west)+(6mm,-24mm)$)
+      --($(current page.north east)+(-6mm,-24mm)$);
+  \end{tikzpicture}%
+  %% HEADER
+  \vspace*{-2mm}%
+  \noindent\begin{minipage}[t]{0.63\linewidth}
+    {\cinzeldeco\fontsize{17}{19}\selectfont\color{#3} #4}\\[1pt]
+    {\cinzel\fontsize{7.5}{9}\selectfont\color{grigionote} #5}\\[2pt]
+    {\itshape\fontsize{8}{10}\selectfont\color{grigionote!80} #6}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[t]{0.34\linewidth}\raggedleft
+    {\cinzel\fontsize{7}{8.5}\selectfont\color{grigionote} #1}\\[1pt]
+    {\cinzel\fontsize{7}{8.5}\selectfont\color{grigionote!55} #2}\\[3pt]
+    {\cinzeldeco\fontsize{7.5}{9}\selectfont\color{oro} VESPRI 1282}
+  \end{minipage}
+  \par\vspace{2pt}
+  {\color{oro}\rule{\linewidth}{0.7pt}}\par\vspace{0.5pt}
+  {\color{oro!35}\rule{\linewidth}{0.3pt}}\par\vspace{3pt}
+  {\itshape\fontsize{8.5}{11}\selectfont\color{grigionote} «#7»}
+  \par\vspace{2pt}\lineafine\par\vspace{2pt}
+}{%
+  \par\vspace{1pt}
+  {\color{oro}\rule{\linewidth}{0.7pt}}\par
+  \vspace{0.5pt}
+  {\centering\cinzel\fontsize{6.5}{8}\selectfont\color{oro!60}
+    Fortuna: +1d6 · 2 Stress · max 3×\quad|\quad Resistere: 1 Stress\par}
+  \newpage
+}
+
+%% ---- MACRO BLOCCHI ----
+
+\newcommand{\azioni}[4]{%
+  \noindent\begin{minipage}[t]{0.485\linewidth}
+    {\cinzel\fontsize{7}{8.5}\selectfont\color{oro} Cuore / Heart}\\\linea
+    #1\vspace{3pt}
+    {\cinzel\fontsize{7}{8.5}\selectfont\color{oro} Mente / Mind}\\\linea
+    #2
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.485\linewidth}
+    {\cinzel\fontsize{7}{8.5}\selectfont\color{oro} Corpo / Body}\\\linea
+    #3\vspace{3pt}
+    {\cinzel\fontsize{7}{8.5}\selectfont\color{oro} Spirito / Spirit}\\\linea
+    #4
+  \end{minipage}%
+}
+
+\newcommand{\risorse}{%
+  \par\vspace{2pt}\lineafine\par\vspace{2pt}
+  \noindent\begin{minipage}[t]{0.31\linewidth}
+    {\cinzel\fontsize{7}{8.5}\selectfont\color{oro} Stress}\\[2pt]
+    \cerchio\cerchio\cerchio\cerchio\cerchio\\[2pt]
+    \cerchio\cerchio\cerchio\cerchio
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.20\linewidth}
+    {\cinzel\fontsize{7}{8.5}\selectfont\color{oro} Danno}\\[2pt]
+    \cerchio\cerchio\\[2pt]
+    \cerchio\cerchio
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.44\linewidth}
+    {\cinzel\fontsize{7}{8.5}\selectfont\color{oro} Traumi}\\[2pt]
+    \boxtrauma{Sfiducia / Distrust}\\[2pt]
+    \boxtrauma{Ossessione / Obsession}\\[2pt]
+    \boxtrauma{Colpa / Guilt}\\[2pt]
+    \boxtrauma{Paura · Fede perduta}
+  \end{minipage}%
+  \par\vspace{2pt}\lineafine
+}
+
+\newcommand{\donofardello}[4]{%
+  \par\vspace{2pt}
+  \noindent\begin{minipage}[t]{0.485\linewidth}
+    \begin{mdframed}[backgroundcolor=oro!9,linecolor=oro,linewidth=0.5pt,
+      roundcorner=3pt,innerleftmargin=5pt,innerrightmargin=5pt,
+      innertopmargin=4pt,innerbottommargin=4pt,skipabove=0pt,skipbelow=0pt]
+      {\cinzel\fontsize{7}{8.5}\selectfont\color{oro}\bfseries Dono — #1}
+      \par\vspace{1pt}
+      {\fontsize{7.5}{10}\selectfont\color{testoscuro} #2}
+    \end{mdframed}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.485\linewidth}
+    \begin{mdframed}[backgroundcolor=pergamena,linecolor=bordoscuro,linewidth=0.5pt,
+      roundcorner=3pt,innerleftmargin=5pt,innerrightmargin=5pt,
+      innertopmargin=4pt,innerbottommargin=4pt,skipabove=0pt,skipbelow=0pt]
+      {\cinzel\fontsize{7}{8.5}\selectfont\color{bordoscuro}\bfseries Fardello — #3}
+      \par\vspace{1pt}
+      {\fontsize{7.5}{10}\selectfont\color{testoscuro} #4}
+    \end{mdframed}
+  \end{minipage}%
+}
+
+\newcommand{\fondo}[1]{%
+  \par\vspace{3pt}\lineafine\par\vspace{2pt}
+  \noindent\begin{minipage}[t]{0.485\linewidth}
+    {\cinzel\fontsize{7}{8.5}\selectfont\color{oro} Legame iniziale}\\[2pt]
+    {\fontsize{7.5}{10}\selectfont\color{testoscuro}\itshape #1}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.485\linewidth}
+    {\cinzel\fontsize{7}{8.5}\selectfont\color{oro} Note}\\[3pt]
+    {\color{oro!30}\rule{\linewidth}{0.3pt}}\\[6pt]
+    {\color{oro!30}\rule{\linewidth}{0.3pt}}\\[6pt]
+    {\color{oro!30}\rule{\linewidth}{0.3pt}}\\[6pt]
+    {\color{oro!30}\rule{\linewidth}{0.3pt}}
+  \end{minipage}
+  \par\vspace{3pt}\lineafine\par\vspace{2pt}
+  \noindent\begin{minipage}[t]{0.54\linewidth}
+    {\cinzel\fontsize{7}{8.5}\selectfont\color{ororosso} Ruolo Passionale (opz.)}\\[2pt]
+    \begin{tikzpicture}
+      \draw[ororosso!40,line width=0.5pt,rounded corners=2pt](0,0)rectangle(5.6cm,0.5cm);
+    \end{tikzpicture}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.42\linewidth}
+    {\cinzel\fontsize{7}{8.5}\selectfont\color{ororosso} Passione}\\[2pt]
+    \cerchioross\cerchioross\cerchioross\cerchioross\cerchioross
+  \end{minipage}%
+}
+
+%% ================================================================
+\begin{document}
+
+%% ================================================================
+%% FAZIONE I — CONGIURATI
+%% ================================================================
+\definecolor{faz}{HTML}{7B2D2D}
+
+\begin{scheda}{I Congiurati}{The Conspirators}{faz}%
+  {Il Messaggero}{The Messenger}%
+  {Ruggero di Amato}%
+  {Porta parole che possono cambiare il mondo. O che possono ucciderti.}
+\azioni{%
+  \azione{Aizzare}{1}\azione{Resistere}{1}\azione{Sfidare}{1}}{%
+  \azione{Studiare}{1}\azione{Tramare}{1}\azione{Ingannare}{2}}{%
+  \azione{Agire}{1}\azione{Combattere}{0}\azione{Manovrare}{2}}{%
+  \azione{Comandare}{0}\azione{Persuadere}{1}\azione{Invocare}{0}}
+\risorse
+\donofardello{Volti multipli}%
+  {Tre identità false sempre pronte. Ingannare in posizione Controllata, a meno che non ti abbiano già visto con quella faccia.}%
+  {La catena}%
+  {Catturato, tira Resistere (Disperata) per non rivelare la fonte. Se fallisci: -1 al punteggio della rete.}
+\fondo{Il Cospiratore sa il tuo vero nome. Sei l'unico che lo sa.}
+\end{scheda}
+
+\begin{scheda}{I Congiurati}{The Conspirators}{faz}%
+  {Il Cospiratore}{The Conspirator}%
+  {Gualtiero de Caltagirone}%
+  {Conosci il piano. O almeno, la tua parte di esso.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{1}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{2}\azione{Tramare}{2}\azione{Ingannare}{1}}{%
+  \azione{Agire}{0}\azione{Combattere}{0}\azione{Manovrare}{1}}{%
+  \azione{Comandare}{1}\azione{Persuadere}{1}\azione{Invocare}{0}}
+\risorse
+\donofardello{Compartimentazione}%
+  {Una volta per sessione: dichiara che qualcosa era «parte del piano» dall'inizio. Cambia la narrazione, non i dadi.}%
+  {Il peso di sapere}%
+  {Quando un alleato fallisce Studiare e tu riveli l'informazione: subisci 1 Stress.}
+\fondo{Il Messaggero porta le tue parole. Speri che sia abbastanza prudente.}
+\end{scheda}
+
+\begin{scheda}{I Congiurati}{The Conspirators}{faz}%
+  {La Spia}{The Spy}%
+  {Margherita di Brindisi}%
+  {Lavori dentro il sistema angioino. Da troppo tempo.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{1}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{2}\azione{Tramare}{1}\azione{Ingannare}{2}}{%
+  \azione{Agire}{1}\azione{Combattere}{0}\azione{Manovrare}{1}}{%
+  \azione{Comandare}{0}\azione{Persuadere}{1}\azione{Invocare}{0}}
+\risorse
+\donofardello{Dentro il palazzo}%
+  {Accesso fisico al Palazzo dei Normanni, uffici dei giustizieri, quartieri militari — finché mantieni la copertura.}%
+  {Contaminazione}%
+  {Quando agisci contro un funzionario angioino con rapporti personali: tira Resistere o subisci 1 Stress.}
+\fondo{Il Cospiratore ti ha reclutato tre anni fa. Non ti sei ancora perdonata di aver accettato.}
+\end{scheda}
+
+\begin{scheda}{I Congiurati}{The Conspirators}{faz}%
+  {Il Mercante}{The Merchant}%
+  {Bartolomeo Lancia}%
+  {Il denaro non ha bandiera. Ma tu sì.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{1}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{1}\azione{Tramare}{2}\azione{Ingannare}{1}}{%
+  \azione{Agire}{0}\azione{Combattere}{0}\azione{Manovrare}{1}}{%
+  \azione{Comandare}{1}\azione{Persuadere}{2}\azione{Invocare}{0}}
+\risorse
+\donofardello{Rete commerciale}%
+  {Contatti in ogni porto siciliano. Informazioni, merci o passaggi sicuri senza tiro — ma ogni richiesta ha un prezzo narrativo.}%
+  {Il conto aperto}%
+  {Hai finanziato la cospirazione. Se fallisce, sei rovinato. Quando un piano vacilla: Resistere o agisci in modo egoista.}
+\fondo{La Spia ti ha fornito documenti falsi che ti hanno salvato la vita. Non l'hai ancora ripagata.}
+\end{scheda}
+
+\begin{scheda}{I Congiurati}{The Conspirators}{faz}%
+  {Il Soldato Disertore}{The Deserter}%
+  {Drogo de Metz}%
+  {Hai combattuto per Carlo d'Angiò. Poi hai visto cosa difendevi.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{2}\azione{Sfidare}{1}}{%
+  \azione{Studiare}{0}\azione{Tramare}{0}\azione{Ingannare}{0}}{%
+  \azione{Agire}{1}\azione{Combattere}{2}\azione{Manovrare}{1}}{%
+  \azione{Comandare}{1}\azione{Persuadere}{0}\azione{Invocare}{0}}
+\risorse
+\donofardello{Disciplina militare}%
+  {Quando proteggi un alleato da danno fisico: riduzione automatica di 1 casella, anche in posizione Disperata, senza tiro.}%
+  {La faccia conosciuta}%
+  {I soldati angioini di Palermo ti riconoscono. Il GM può dichiarare che qualcuno ti ha notato in zone presidiate.}
+\fondo{Il Messaggero ti ha convinto a cambiare parte. Non eri difficile da convincere.}
+\end{scheda}
+
+\begin{scheda}{I Congiurati}{The Conspirators}{faz}%
+  {Il Nobile in Esilio}{The Noble in Exile}%
+  {Tancredi di Chiaramonte}%
+  {Discendente di una famiglia che Federico amava. Carlo odia.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{1}\azione{Sfidare}{1}}{%
+  \azione{Studiare}{1}\azione{Tramare}{1}\azione{Ingannare}{0}}{%
+  \azione{Agire}{0}\azione{Combattere}{0}\azione{Manovrare}{0}}{%
+  \azione{Comandare}{2}\azione{Persuadere}{2}\azione{Invocare}{0}}
+\risorse
+\donofardello{Il nome antico}%
+  {Il tuo cognome apre porte tra i baroni. Quando ti presenti apertamente non possono ignorarti — anche senza fidarsi di te.}%
+  {Il bersaglio}%
+  {Sei sulla lista di sorveglianza angioina. Ogni volta che esci allo scoperto: il GM può aumentare l'allerta di un grado.}
+\fondo{Il Cospiratore conosce tuo fratello, ancora a Barcellona. Le sue notizie non sono sempre buone.}
+\end{scheda}
+
+\begin{scheda}{I Congiurati}{The Conspirators}{faz}%
+  {Il Falsario}{The Forger}%
+  {Niccolò il Cretese}%
+  {Documenti, sigilli, identità. Tutto ciò che non esiste, tu lo crei.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{1}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{1}\azione{Tramare}{1}\azione{Ingannare}{2}}{%
+  \azione{Agire}{2}\azione{Combattere}{0}\azione{Manovrare}{1}}{%
+  \azione{Comandare}{0}\azione{Persuadere}{0}\azione{Invocare}{0}}
+\risorse
+\donofardello{Il documento giusto}%
+  {Una volta per scena: hai un documento che risolve un problema burocratico. Nessun tiro — regge solo finché non viene esaminato da un esperto.}%
+  {La traccia}%
+  {Ogni documento lascia una firma stilistica. Dopo il 3° usato: il GM può dichiarare che qualcuno ha notato la somiglianza.}
+\fondo{Il Mercante è il tuo principale cliente. Sa troppo di te per essere solo un cliente.}
+\end{scheda}
+
+%% ================================================================
+%% FAZIONE II — BARONI
+%% ================================================================
+\definecolor{faz}{HTML}{2D5A2D}
+
+\begin{scheda}{I Baroni Siciliani}{The Barons}{faz}%
+  {Il Barone}{The Baron}%
+  {Simone di Mazzarino}%
+  {Hai terra, uomini, e obblighi verso entrambi. E verso tuo figlio.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{1}\azione{Sfidare}{1}}{%
+  \azione{Studiare}{1}\azione{Tramare}{1}\azione{Ingannare}{0}}{%
+  \azione{Agire}{0}\azione{Combattere}{0}\azione{Manovrare}{0}}{%
+  \azione{Comandare}{2}\azione{Persuadere}{2}\azione{Invocare}{0}}
+\risorse
+\donofardello{La parola data}%
+  {Accordo dichiarato esplicitamente: entrambi +1d sui tiri relativi. Chi lo rompe: l'altro guadagna un dado contro di lui.}%
+  {Il peso del feudo}%
+  {Prima di ogni azione rischiosa il GM può chiedere: «e i tuoi uomini? E la tua famiglia?» Devi rispondere prima di tirare.}
+\fondo{Il Cavaliere ti è fedele. Speri che questa fedeltà sopravviva alle scelte che stai per fare.}
+\end{scheda}
+
+\begin{scheda}{I Baroni Siciliani}{The Barons}{faz}%
+  {Il Cavaliere}{The Knight}%
+  {Riccardo Bonello}%
+  {Hai giurato fedeltà. A chi, esattamente, è diventato complicato.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{1}\azione{Sfidare}{2}}{%
+  \azione{Studiare}{0}\azione{Tramare}{0}\azione{Ingannare}{0}}{%
+  \azione{Agire}{1}\azione{Combattere}{2}\azione{Manovrare}{1}}{%
+  \azione{Comandare}{1}\azione{Persuadere}{0}\azione{Invocare}{0}}
+\risorse
+\donofardello{L'addestramento}%
+  {In combattimento con almeno un alleato: sempre posizione Rischiosa (non Disperata), a meno di essere solo e circondato.}%
+  {Il giuramento vecchio}%
+  {Hai giurato a Carlo o a un suo vassallo. Ogni azione contro gli interessi angioini: Resistere o 1 Stress dalla dissonanza.}
+\fondo{Il Barone ti protegge. Non sei sicuro di meritarlo.}
+\end{scheda}
+
+\begin{scheda}{I Baroni Siciliani}{The Barons}{faz}%
+  {La Castellana}{The Chatelaine}%
+  {Elisabetta di Paternò}%
+  {Tuo marito è morto. Il castello è tuo. Gli uomini di Carlo pensano di poter trattare con una donna.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{1}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{1}\azione{Tramare}{2}\azione{Ingannare}{1}}{%
+  \azione{Agire}{0}\azione{Combattere}{0}\azione{Manovrare}{0}}{%
+  \azione{Comandare}{2}\azione{Persuadere}{1}\azione{Invocare}{0}}
+\risorse
+\donofardello{La sottovalutazione}%
+  {Una volta per scena: dichiara che un avversario ti ha sottovalutato. Il prossimo tiro contro di lui: posizione Controllata.}%
+  {La visibilità}%
+  {Manovrare e Ingannare in zone controllate dai francesi: sempre Rischiosa, mai Controllata.}
+\fondo{Il Notaio tiene i tuoi documenti. Sono documenti che non dovrebbero esistere.}
+\end{scheda}
+
+\begin{scheda}{I Baroni Siciliani}{The Barons}{faz}%
+  {Il Notaio}{The Notary}%
+  {Matteo di Termini}%
+  {La legge è uno strumento. La domanda è chi la impugna.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{1}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{2}\azione{Tramare}{2}\azione{Ingannare}{1}}{%
+  \azione{Agire}{0}\azione{Combattere}{0}\azione{Manovrare}{0}}{%
+  \azione{Comandare}{1}\azione{Persuadere}{1}\azione{Invocare}{0}}
+\risorse
+\donofardello{Archivio vivente}%
+  {Precedenti giuridici della Sicilia normanna e sveva. Studiare per trovare base legale a quasi qualunque azione — non la rende sicura, ma giustificabile.}%
+  {Il documento scomodo}%
+  {Hai un documento pericoloso. Il GM sa cosa c'è scritto. Tu non l'hai ancora letto fino in fondo.}
+\fondo{La Castellana si fida di te. Hai paura che questa fiducia sia mal riposta.}
+\end{scheda}
+
+\begin{scheda}{I Baroni Siciliani}{The Barons}{faz}%
+  {Il Figlio}{The Son}%
+  {Goffredo di Mazzarino}%
+  {Tuo padre negozia. Tu vorresti agire.}
+\azioni{%
+  \azione{Aizzare}{1}\azione{Resistere}{1}\azione{Sfidare}{2}}{%
+  \azione{Studiare}{0}\azione{Tramare}{0}\azione{Ingannare}{0}}{%
+  \azione{Agire}{2}\azione{Combattere}{1}\azione{Manovrare}{1}}{%
+  \azione{Comandare}{0}\azione{Persuadere}{0}\azione{Invocare}{0}}
+\risorse
+\donofardello{L'impeto}%
+  {Agire per primo in una crisi senza aspettare istruzioni: +1d. Se riesce: +1 al punteggio di fazione.}%
+  {L'inesperienza}%
+  {Negoziazione o diplomazia: sempre posizione Rischiosa, mai Controllata. Stai ancora imparando.}
+\fondo{Il Cavaliere ti ha insegnato a combattere. Non ti ha ancora insegnato quando non farlo.}
+\end{scheda}
+
+\begin{scheda}{I Baroni Siciliani}{The Barons}{faz}%
+  {Il Medico}{The Physician}%
+  {Maestro Filippo Carafa da Salerno}%
+  {Curi tutti, anche i francesi. Soprattutto i francesi — sanno cose.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{1}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{2}\azione{Tramare}{0}\azione{Ingannare}{1}}{%
+  \azione{Agire}{1}\azione{Combattere}{0}\azione{Manovrare}{0}}{%
+  \azione{Comandare}{0}\azione{Persuadere}{2}\azione{Invocare}{1}}
+\risorse
+\donofardello{La fiducia del paziente}%
+  {Chi hai curato ti è debitore: un'informazione o un piccolo favore senza tiro — una sola volta per persona.}%
+  {Il giuramento di Ippocrate}%
+  {Non puoi rifiutare cure a chi ne ha bisogno, nemmeno a un angioino. Se lo fai: 2 Stress immediati.}
+\fondo{Il Barone ti paga. \textit{Cross:} Yusuf al-Balarmì (Clero) e Maimone di Palermo (Popolo) sanno cose di te che il Barone non deve sapere.}
+\end{scheda}
+
+\begin{scheda}{I Baroni Siciliani}{The Barons}{faz}%
+  {La Moglie del Traditore}{The Traitor's Wife}%
+  {Costanza Ventimiglia}%
+  {Tuo marito ha ceduto agli Angioini. Tu no.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{2}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{1}\azione{Tramare}{1}\azione{Ingannare}{2}}{%
+  \azione{Agire}{0}\azione{Combattere}{0}\azione{Manovrare}{1}}{%
+  \azione{Comandare}{0}\azione{Persuadere}{1}\azione{Invocare}{0}}
+\risorse
+\donofardello{La doppia vita}%
+  {Moglie obbediente di un collaboratore agli occhi angioini. Ingannare nelle zone di controllo: sempre Controllata.}%
+  {La casa divisa}%
+  {Il GM tiene un orologio segreto: ogni azione rischiosa vicino a casa lo fa avanzare. Quando è pieno: tuo marito scopre tutto.}
+\fondo{La Castellana è tua cugina. Condividete più segreti di quanto sia prudente.}
+\end{scheda}
+
+%% ================================================================
+%% FAZIONE III — CLERO
+%% ================================================================
+\definecolor{faz}{HTML}{1B3A5C}
+
+\begin{scheda}{Il Clero}{The Clergy}{faz}%
+  {Il Vescovo}{The Bishop}%
+  {Berardo di Castronovo}%
+  {Servire Dio. Servire Roma. Servire il tuo popolo. Scegli.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{1}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{1}\azione{Tramare}{1}\azione{Ingannare}{0}}{%
+  \azione{Agire}{0}\azione{Combattere}{0}\azione{Manovrare}{0}}{%
+  \azione{Comandare}{2}\azione{Persuadere}{1}\azione{Invocare}{2}}
+\risorse
+\donofardello{L'autorità episcopale}%
+  {Una volta per sessione: ordine che nessun fedele può ignorare senza conseguenze spirituali. Chi disobbedisce: 1 Stress da senso di colpa.}%
+  {Roma guarda}%
+  {I tuoi movimenti vengono riferiti alla curia. Il GM tiene un orologio romano: quando è pieno, arriva una lettera da Roma.}
+\fondo{Il Frate Predicatore è i tuoi occhi per strada. Non sei sicuro di quanto si fidi di te.}
+\end{scheda}
+
+\begin{scheda}{Il Clero}{The Clergy}{faz}%
+  {Il Frate Predicatore}{The Preaching Friar}%
+  {Fra' Tommaso di Caltagirone}%
+  {La parola di Dio è un'arma. Dipende solo da chi la impugna.}
+\azioni{%
+  \azione{Aizzare}{2}\azione{Resistere}{1}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{1}\azione{Tramare}{0}\azione{Ingannare}{0}}{%
+  \azione{Agire}{0}\azione{Combattere}{0}\azione{Manovrare}{1}}{%
+  \azione{Comandare}{0}\azione{Persuadere}{1}\azione{Invocare}{2}}
+\risorse
+\donofardello{La folla}%
+  {Parlando a 5+ persone: tiro Aizzare sempre Standard o Eccezionale — mai Limitato.}%
+  {Il fervore}%
+  {Una volta per sessione il GM può dichiarare che hai spinto troppo: la folla ha reagito come non volevi. 2 Stress.}
+\fondo{Il Sacrista ti copre le spalle. Ha visto cose che non dimentica.}
+\end{scheda}
+
+\begin{scheda}{Il Clero}{The Clergy}{faz}%
+  {Il Canonico}{The Canon}%
+  {Pandolfo di Messina}%
+  {Conosci i segreti della cattedrale. Anche quelli che non sono stati confessati.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{1}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{2}\azione{Tramare}{2}\azione{Ingannare}{1}}{%
+  \azione{Agire}{0}\azione{Combattere}{0}\azione{Manovrare}{0}}{%
+  \azione{Comandare}{0}\azione{Persuadere}{1}\azione{Invocare}{1}}
+\risorse
+\donofardello{L'archivio}%
+  {Una volta per sessione: informazione dagli archivi della cattedrale rilevante per la situazione. Il GM decide il contenuto.}%
+  {Il segreto confessionale}%
+  {Il GM ti dice a inizio sessione una cosa che sai e non puoi rivelare. Riguarda qualcuno in questa storia.}
+\fondo{Il Vescovo ti ha promosso. Non sei certo di aver capito perché.}
+\end{scheda}
+
+\begin{scheda}{Il Clero}{The Clergy}{faz}%
+  {La Badessa}{The Abbess}%
+  {Suor Adalasia di Troina}%
+  {Il tuo convento è un rifugio. Per chi, dipende da te.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{2}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{1}\azione{Tramare}{1}\azione{Ingannare}{0}}{%
+  \azione{Agire}{0}\azione{Combattere}{0}\azione{Manovrare}{0}}{%
+  \azione{Comandare}{2}\azione{Persuadere}{1}\azione{Invocare}{1}}
+\risorse
+\donofardello{Santuario}%
+  {Territorio sacro: i soldati francesi non possono entrare senza violare il diritto canonico. Puoi nascondere persone e documenti.}%
+  {Le mie sorelle}%
+  {Prima di ogni azione che possa attirare attenzione angioina sul convento: Resistere o 1 Stress dal peso della responsabilità.}
+\fondo{Il Frate Predicatore ti porta notizie dal mondo. Le notizie non sono mai buone abbastanza.}
+\end{scheda}
+
+\begin{scheda}{Il Clero}{The Clergy}{faz}%
+  {Il Sacrista}{The Sacristan}%
+  {Arnaldo Gennarino}%
+  {Controlli le chiavi, le campane, i tempi. Più potere di quanto sembri.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{1}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{1}\azione{Tramare}{0}\azione{Ingannare}{1}}{%
+  \azione{Agire}{2}\azione{Combattere}{0}\azione{Manovrare}{2}}{%
+  \azione{Comandare}{0}\azione{Persuadere}{0}\azione{Invocare}{1}}
+\risorse
+\donofardello{Le campane}%
+  {Puoi suonare le campane di Santo Spirito. Al momento giusto: +1 automatico al punteggio. Al momento sbagliato: risposta angioina immediata.}%
+  {La visibilità del gesto}%
+  {Sei l'unico che può suonare quelle campane. Se qualcosa va storto quella sera, tutti sapranno che sei stato tu.}
+\fondo{Il Canonico ti ha insegnato a leggere. Gli devi più di quello.}
+\end{scheda}
+
+\begin{scheda}{Il Clero}{The Clergy}{faz}%
+  {Il Medico Arabo}{The Arab Physician}%
+  {Yusuf ibn Khalaf al-Balarm\`\i}%
+  {La tua famiglia era qui prima dei Normanni. E dopo gli Angioini.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{1}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{2}\azione{Tramare}{0}\azione{Ingannare}{1}}{%
+  \azione{Agire}{1}\azione{Combattere}{0}\azione{Manovrare}{0}}{%
+  \azione{Comandare}{0}\azione{Persuadere}{2}\azione{Invocare}{1}}
+\risorse
+\donofardello{La memoria lunga}%
+  {Conosci Palermo meglio di chiunque. Una volta per scena: via alternativa che elimina qualunque ostacolo fisico al movimento.}%
+  {Lo straniero in casa propria}%
+  {Comandare con persone che non ti conoscono: sempre Rischiosa. Sei sospetto agli occhi di tutti, qualunque cosa tu faccia.}
+\fondo{La Badessa ti ha protetto una volta. Non dimentichi. \textit{Cross:} Filippo Carafa (Baroni) è il tuo interlocutore per la medicina latina.}
+\end{scheda}
+
+\begin{scheda}{Il Clero}{The Clergy}{faz}%
+  {Il Pellegrino}{The Pilgrim}%
+  {Luca di Bari}%
+  {Sei arrivato a Palermo per caso. O forse no.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{1}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{1}\azione{Tramare}{0}\azione{Ingannare}{2}}{%
+  \azione{Agire}{0}\azione{Combattere}{0}\azione{Manovrare}{2}}{%
+  \azione{Comandare}{0}\azione{Persuadere}{1}\azione{Invocare}{1}}
+\risorse
+\donofardello{Nessuno mi conosce}%
+  {Non sei nelle liste di sorveglianza angioine. Manovrare in zone controllate: sempre posizione Controllata.}%
+  {Nessuno mi conosce}%
+  {Non hai risorse, contatti né base sicura. Ogni volta che hai bisogno di supporto logistico: devi tirare per trovarlo.}
+\fondo{Il Frate Predicatore ti ha dato da mangiare il primo giorno. Gli hai detto il tuo nome vero. Nessun altro lo sa.}
+\end{scheda}
+
+%% ================================================================
+%% FAZIONE IV — POPOLO
+%% ================================================================
+\definecolor{faz}{HTML}{8B4513}
+
+\begin{scheda}{Il Popolo}{The People}{faz}%
+  {L'Artigiano}{The Craftsman}%
+  {Calogero Ferrante}%
+  {Fai cose con le mani. Sai anche come rompere cose.}
+\azioni{%
+  \azione{Aizzare}{1}\azione{Resistere}{1}\azione{Sfidare}{1}}{%
+  \azione{Studiare}{0}\azione{Tramare}{0}\azione{Ingannare}{0}}{%
+  \azione{Agire}{2}\azione{Combattere}{2}\azione{Manovrare}{1}}{%
+  \azione{Comandare}{0}\azione{Persuadere}{0}\azione{Invocare}{0}}
+\risorse
+\donofardello{Gli strumenti del mestiere}%
+  {Sempre con te strumenti che funzionano come armi o attrezzi da scasso senza destare sospetti. Nessun problema di equipaggiamento.}%
+  {La bottega}%
+  {Una famiglia dipende dal tuo lavoro. Ogni rischio fisico che corri: Resistere o 1 Stress dal pensiero di loro.}
+\fondo{La Pescivendola è tua vicina. Vi siete coperti le spalle a vicenda più di una volta.}
+\end{scheda}
+
+\begin{scheda}{Il Popolo}{The People}{faz}%
+  {La Pescivendola}{The Fishwife}%
+  {Perna di Cassaro}%
+  {Sei al mercato ogni mattina. Sai tutto di tutti.}
+\azioni{%
+  \azione{Aizzare}{1}\azione{Resistere}{1}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{2}\azione{Tramare}{0}\azione{Ingannare}{1}}{%
+  \azione{Agire}{0}\azione{Combattere}{0}\azione{Manovrare}{1}}{%
+  \azione{Comandare}{0}\azione{Persuadere}{2}\azione{Invocare}{0}}
+\risorse
+\donofardello{Le voci del mercato}%
+  {Ogni mattina al mercato: il GM ti dice una cosa vera sulla situazione attuale. Gratuitamente.}%
+  {La lingua}%
+  {Una volta per sessione il GM può dichiarare che hai detto qualcosa ad alta voce che non avresti dovuto.}
+\fondo{Il Ragazzo porta le tue ceste. Lo hai cresciuto come un figlio. Non vuoi che si faccia del male.}
+\end{scheda}
+
+\begin{scheda}{Il Popolo}{The People}{faz}%
+  {Il Ragazzo}{The Boy}%
+  {Salvo Russo}%
+  {Hai quattordici anni e non hai paura di niente. Dovresti.}
+\azioni{%
+  \azione{Aizzare}{1}\azione{Resistere}{1}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{1}\azione{Tramare}{0}\azione{Ingannare}{0}}{%
+  \azione{Agire}{2}\azione{Combattere}{0}\azione{Manovrare}{2}}{%
+  \azione{Comandare}{0}\azione{Persuadere}{0}\azione{Invocare}{0}}
+\risorse
+\donofardello{Invisibile}%
+  {I soldati francesi non ti guardano. Manovrare in aree presidiate: sempre posizione Controllata.}%
+  {Impulsivo}%
+  {Quando vedi qualcuno che ami in pericolo: Resistere o reagisci immediatamente — probabilmente peggiorando la situazione.}
+\fondo{La Pescivendola ti ha tirato su. La ami come una madre. Questo ti spaventa.}
+\end{scheda}
+
+\begin{scheda}{Il Popolo}{The People}{faz}%
+  {Il Pescatore}{The Fisherman}%
+  {Pietro di Cefal\`u}%
+  {Conosci il mare, il porto, e chi viene e va. Soprattutto chi va.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{1}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{2}\azione{Tramare}{0}\azione{Ingannare}{1}}{%
+  \azione{Agire}{1}\azione{Combattere}{1}\azione{Manovrare}{2}}{%
+  \azione{Comandare}{0}\azione{Persuadere}{0}\azione{Invocare}{0}}
+\risorse
+\donofardello{Il porto}%
+  {Accesso alla banchina e alle barche. Persone in/out via mare senza tiro (salvo porto militarizzato). Sai quando le navi di Carlo salpano.}%
+  {Il debito}%
+  {Devi soldi a qualcuno vicino agli Angioini. Il GM può usare questo debito come leva narrativa in qualsiasi momento.}
+\fondo{Il Soldato Disertore ha attraversato il porto grazie a te. Non sai ancora se è stato un errore.}
+\end{scheda}
+
+\begin{scheda}{Il Popolo}{The People}{faz}%
+  {La Vedova}{The Widow}%
+  {Giacoma la Nera}%
+  {Tuo marito è morto per colpa loro. Non l'hanno nemmeno pagata.}
+\azioni{%
+  \azione{Aizzare}{2}\azione{Resistere}{2}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{1}\azione{Tramare}{0}\azione{Ingannare}{0}}{%
+  \azione{Agire}{0}\azione{Combattere}{1}\azione{Manovrare}{0}}{%
+  \azione{Comandare}{0}\azione{Persuadere}{1}\azione{Invocare}{1}}
+\risorse
+\donofardello{Il lutto visibile}%
+  {Parlando pubblicamente del torto subito: Aizzare sempre effetto Eccezionale — mai Standard o Limitato. Il dolore reale muove.}%
+  {I figli}%
+  {Tre figli piccoli. Il GM può mettere uno di loro in pericolo in qualsiasi momento per creare pressione narrativa.}
+\fondo{L'Artigiano era amico di tuo marito. Ti ha promesso di tenerti d'occhio. Non sai se riesce a mantenere la promessa.}
+\end{scheda}
+
+\begin{scheda}{Il Popolo}{The People}{faz}%
+  {Il Guaritore di Strada}{The Street Healer}%
+  {Maimone di Palermo}%
+  {Non sei un medico. Ma sai come tenere in vita la gente.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{1}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{2}\azione{Tramare}{0}\azione{Ingannare}{0}}{%
+  \azione{Agire}{2}\azione{Combattere}{0}\azione{Manovrare}{1}}{%
+  \azione{Comandare}{0}\azione{Persuadere}{1}\azione{Invocare}{1}}
+\risorse
+\donofardello{Mani sicure}%
+  {Curare qualcuno (ridurre caselle danno): sempre almeno effetto Standard. Non puoi peggiorare la condizione di un paziente.}%
+  {La visione}%
+  {Ogni volta che sei vicino a qualcuno ferito: 1 Stress dal peso di ciò che vedi. È il costo di curare tanta gente.}
+\fondo{La Vedova è la tua vicina. I suoi figli ti chiamano zio. \textit{Cross:} Filippo Carafa (Baroni) ti compra erbe e preparati. Paga bene e non fa domande.}
+\end{scheda}
+
+\begin{scheda}{Il Popolo}{The People}{faz}%
+  {Il Vecchio}{The Old One}%
+  {Basilio di Monreale}%
+  {Hai vissuto abbastanza da sapere come va a finire. E vai avanti lo stesso.}
+\azioni{%
+  \azione{Aizzare}{1}\azione{Resistere}{2}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{1}\azione{Tramare}{0}\azione{Ingannare}{0}}{%
+  \azione{Agire}{0}\azione{Combattere}{0}\azione{Manovrare}{0}}{%
+  \azione{Comandare}{1}\azione{Persuadere}{2}\azione{Invocare}{1}}
+\risorse
+\donofardello{La memoria}%
+  {Ricordi la Sicilia prima degli Angioini. Una volta per sessione: dai a un altro PG +1d al prossimo tiro raccontandogli com'era.}%
+  {Il corpo}%
+  {Sei vecchio. Agire e Combattere: sempre posizione Rischiosa, mai Controllata. Il corpo non segue più la testa.}
+\fondo{Il Ragazzo ti ricorda qualcuno. Non gli dici chi. Forse è per questo che gli vuoi bene.}
+\end{scheda}
+
+\end{document}

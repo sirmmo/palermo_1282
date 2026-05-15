@@ -1,0 +1,69 @@
+name: Build PDFs
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: texlive/texlive:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Google Fonts (EB Garamond, Cinzel, Cinzel Decorative)
+        run: |
+          set -eux
+          apt-get update
+          apt-get install -y --no-install-recommends git fontconfig ca-certificates
+          git clone --depth 1 --filter=blob:none --sparse \
+            https://github.com/google/fonts.git /tmp/gfonts
+          cd /tmp/gfonts
+          git sparse-checkout set ofl/ebgaramond ofl/cinzel ofl/cinzeldecorative
+          install -d /usr/share/fonts/truetype/google
+          find ofl/ebgaramond ofl/cinzel ofl/cinzeldecorative \
+            -type f -name '*.ttf' -exec cp {} /usr/share/fonts/truetype/google/ \;
+          fc-cache -fv
+          fc-list | grep -iE 'garamond|cinzel' || (echo "Required fonts missing"; exit 1)
+
+      - name: Build Italian manual
+        working-directory: it
+        run: |
+          xelatex -interaction=nonstopmode -halt-on-error main_it.tex
+          xelatex -interaction=nonstopmode -halt-on-error main_it.tex
+
+      - name: Build English manual
+        working-directory: en
+        run: |
+          xelatex -interaction=nonstopmode -halt-on-error main_en.tex
+          xelatex -interaction=nonstopmode -halt-on-error main_en.tex
+
+      - name: Build character sheets
+        run: |
+          xelatex -interaction=nonstopmode -halt-on-error schede_vespri.tex
+          xelatex -interaction=nonstopmode -halt-on-error schede_vespri.tex
+
+      - name: Collect PDFs
+        run: |
+          mkdir -p out
+          cp it/main_it.pdf       out/vespri_1282_it.pdf
+          cp en/main_en.pdf       out/vespri_1282_en.pdf
+          cp schede_vespri.pdf    out/vespri_1282_schede.pdf
+
+      - name: Upload build artefacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: vespri-1282-pdfs
+          path: out/*.pdf
+          if-no-files-found: error
+
+      - name: Attach PDFs to release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: out/*.pdf

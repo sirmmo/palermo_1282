@@ -1,0 +1,109 @@
+%% ============================================================
+%% it/main_it.tex
+%% VESPRI 1282 — Versione Italiana
+%% Compila con: xelatex main_it.tex (dalla cartella it/)
+%% ============================================================
+
+\documentclass[12pt, twoside, openright]{memoir}
+\input{preamble_it}
+
+\begin{document}
+
+%% ---- COPERTINA ----
+\begin{titlingpage}
+  \vspace*{2cm}
+  \begin{center}
+    \textcolor{oro}{\pgfornament[width=3cm]{15}}
+    \hspace{12pt}
+    \textcolor{oro}{\pgfornament[width=3cm,symmetry=h]{15}}
+    \vspace{1cm}
+
+    {\cinzeldeco\fontsize{52}{56}\selectfont\color{oro} VESPRI}
+
+    \vspace{0.3cm}
+    \filettodoppio
+
+    {\cinzel\fontsize{28}{32}\selectfont\color{grigionote} 1282}
+
+    \filettodoppio
+    \vspace{0.5cm}
+
+    {\itshape\large\color{grigionote}
+      Una cospirazione alle soglie della rivolta}
+
+    \vspace{0.5cm}
+
+    {\itshape\large\color{grigionote}
+      Marco Montanari\\
+      OpenHistoryMap, Mensa Italia\\
+      creato per \\
+      Mensa Italia Games\\
+      4-7 giugno 2026 - Palermo}
+
+    \vspace{1.2cm}
+    \textcolor{oro!50}{\pgfornament[width=5cm]{88}}
+
+    \vspace{1.2cm}
+    {\cinzel\small\color{grigionote}
+      One-shot Forged in the Dark · 4 tavoli · 28--35 giocatori}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.25\linewidth]{forged_in_the_dark_logo2_0 (1).png}
+\end{figure}
+    \vfill
+    {\cinzel\footnotesize\color{oro!60}
+      \textit{Palermo, febbraio--marzo 1282}}
+  \end{center}
+\end{titlingpage}
+
+%% ---- CREDITI ----
+\cleardoublepage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+  \textcolor{oro}{\pgfornament[width=1.5cm]{15}}
+\end{center}
+\vspace{1cm}
+{\small\color{grigionote}
+\noindent\textit{Questo manuale è rilasciato sotto licenza Creative Commons
+Attribution-ShareAlike 4.0 International (CC BY-SA 4.0).}
+
+\medskip
+\noindent\textbf{Forged in the Dark} è un sistema di gioco creato da
+John Harper. \textit{Vespri 1282} è un'opera derivata non ufficiale,
+non affiliata con Evil Hat Productions.
+
+\medskip
+\noindent\textbf{OpenHistoryMap} --- \url{https://openhistorymap.org}\\
+\textbf{rpg-schema.org} --- \url{https://rpg-schema.org}
+}
+\vspace*{\fill}
+
+%% ---- INDICE ----
+\cleardoublepage
+\tableofcontents
+
+%% ============================================================
+\part{Il Contesto}
+\input{sections/01_storica}
+
+%% ============================================================
+\part{Il Gioco}
+\input{sections/02_regole}
+\input{sections/03_fazioni}
+\input{sections/04_playbook}
+\input{sections/05_npc}
+\input{sections/06_esiti}
+\input{sections/08_passione}
+
+%% ============================================================
+\part{Public History}
+\input{sections/07_public_history}
+
+%% ============================================================
+\appendix
+\input{sections/appendici/app_storica}
+\input{../shared/app_rpgschema}
+\input{../shared/app_ohm}
+
+\end{document}

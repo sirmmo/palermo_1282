@@ -1,0 +1,206 @@
+%% it/sections/02_regole.tex
+%% ============================================================
+%% 02_regole.tex — Regole FitD adattate / Adapted FitD Rules
+%% ============================================================
+
+\chapter{Le Regole / The Rules}
+\markboth{Le Regole}{The Rules}
+
+\lettrine[lines=3]{V}{espri} 1282 usa il sistema \textbf{Forged in the Dark}
+(FitD), creato da John Harper per \textit{Blades in the Dark}. Questa sezione
+presenta le regole adattate al contesto storico e alla struttura multi-tavolo.
+
+\section{Il Cuore del Sistema}
+
+Quando un personaggio tenta qualcosa di rischioso e l'esito è incerto,
+si tira un dado. Si raccoglie un numero di dadi a sei facce pari al valore
+dell'azione pertinente, si tira, e si considera il risultato più alto.
+
+\regola[Tiro di Azione]{
+  \textbf{6}: Successo pieno. Ottieni quello che vuoi, senza costo.\\
+  \textbf{4--5}: Successo parziale. Ottieni quello che vuoi, ma con
+  una complicazione, un costo, o un effetto ridotto.\\
+  \textbf{1--3}: Fallimento. Le cose vanno storte. Il GM introduce
+  una conseguenza negativa.\\[4pt]
+  Se non hai dadi (azione a 0), tira \textbf{due dadi} e prendi il
+  risultato più basso.
+}
+
+\subsection{Posizione e Effetto}
+
+Prima di ogni tiro, il GM stabilisce due parametri fondamentali:
+
+\textbf{Posizione} — quanto sei esposto al rischio:
+\begin{itemize}[nosep]
+  \item \textit{Controllata} — sei al sicuro, il rischio è minimo
+  \item \textit{Rischiosa} — situazione tesa, le conseguenze sono serie
+  \item \textit{Disperata} — sei in pericolo reale, le conseguenze possono essere devastanti
+\end{itemize}
+
+\textbf{Effetto} — quanto riesci a incidere sulla situazione:
+\begin{itemize}[nosep]
+  \item \textit{Limitato} — il tuo impatto è piccolo
+  \item \textit{Standard} — il tuo impatto è quello atteso
+  \item \textit{Eccezionale} — il tuo impatto supera le aspettative
+\end{itemize}
+
+\nota{Per il GM}{
+  Posizione ed effetto sono strumenti narrativi, non parametri fissi.
+  Cambiali liberamente in risposta alle azioni dei giocatori. Un piano
+  ben elaborato può spostare una posizione da Rischiosa a Controllata;
+  una distrazione improvvisa può fare il contrario.
+}
+
+\secsep
+
+\section{Le Azioni}
+
+I personaggi di \textit{Vespri 1282} agiscono attraverso \textbf{dodici
+azioni} raggruppate in quattro attributi che riflettono le tensioni
+del periodo storico.
+
+\subsection{Cuore — \textit{Passione e Volontà}}
+
+\begin{description}[leftmargin=2em, style=nextline]
+  \item[\cinzel Aizzare] Infiammare gli animi, muovere le folle,
+    fare appelli emotivi. L'azione del predicatore, del demagogo, del martire.
+  \item[\cinzel Resistere] Tenere duro sotto pressione, sopportare il
+    dolore fisico o emotivo, non cedere all'interrogatorio.
+  \item[\cinzel Sfidare] Affrontare direttamente un avversario, mettersi
+    davanti al pericolo, accettare il confronto aperto.
+\end{description}
+
+\subsection{Mente — \textit{Intelligenza e Astuzia}}
+
+\begin{description}[leftmargin=2em, style=nextline]
+  \item[\cinzel Studiare] Raccogliere informazioni, leggere persone e
+    situazioni, capire i piani altrui.
+  \item[\cinzel Tramare] Elaborare piani, costruire reti, coordinare
+    agenti su scala larga.
+  \item[\cinzel Ingannare] Mentire con convinzione, costruire false
+    identità, confondere gli avversari.
+\end{description}
+
+\subsection{Corpo — \textit{Forza e Destrezza}}
+
+\begin{description}[leftmargin=2em, style=nextline]
+  \item[\cinzel Agire] Muoversi rapidamente, eseguire azioni fisiche
+    di precisione, furtività.
+  \item[\cinzel Combattere] Usare la violenza in modo efficace, proteggere
+    gli alleati, disarmare o neutralizzare avversari.
+  \item[\cinzel Manovrare] Spostarsi attraverso spazi controllati,
+    passare inosservati, sfuggire alla sorveglianza.
+\end{description}
+
+\subsection{Spirito — \textit{Influenza e Fede}}
+
+\begin{description}[leftmargin=2em, style=nextline]
+  \item[\cinzel Comandare] Guidare con autorità, dare ordini che vengono
+    eseguiti, mantenere la disciplina.
+  \item[\cinzel Persuadere] Convincere con argomenti, negoziare, sedurre con parole.
+  \item[\cinzel Invocare] Appellarsi a forze più grandi — Dio, la giustizia,
+    la memoria degli antenati. Azione speciale del Clero, disponibile
+    a tutti nei momenti estremi.
+\end{description}
+
+\secsep
+
+\section{Stress e Trauma}
+
+Ogni personaggio ha \textbf{9 caselle di Stress}. Lo stress si accumula
+quando si subiscono conseguenze, si usa la fortuna, ci si mette in
+situazioni disperate. Quando si riempie la nona casella, il personaggio
+subisce un \textbf{Trauma} e la casella si svuota.
+
+\subsection{Traumi di Vespri 1282}
+
+\begin{itemize}[nosep]
+  \item \textit{Sfiducia} — non ti fidi più di nessuno, nemmeno degli alleati
+  \item \textit{Ossessione} — un obiettivo consuma ogni altra considerazione
+  \item \textit{Colpa} — hai fatto qualcosa di imperdonabile
+  \item \textit{Paura} — un tipo specifico di situazione ti paralizza
+  \item \textit{Fede perduta} — non credi più in ciò che ti ha portato fin qui
+\end{itemize}
+
+Un personaggio con \textbf{4 traumi} è fuori gioco.
+
+\regola[Usare la Fortuna]{
+  Prima di un tiro, puoi dichiarare di usare la Fortuna. Aggiungi
+  \textbf{1d6} al tiro. Poi subisci \textbf{2 punti di Stress}.
+  Puoi usare la Fortuna più volte sullo stesso tiro (massimo 3 volte).
+}
+
+\regola[Resistere alle Conseguenze]{
+  Tira i dadi dell'attributo pertinente. Ogni risultato sopra 3 riduce
+  la severità della conseguenza. Un 6 la elimina completamente. Subisci
+  comunque \textbf{1 punto di Stress} per aver resistito.
+}
+
+\secsep
+
+\section{Meccaniche Multi-Tavolo}
+
+\subsection{Il Punteggio di Fazione}
+
+Ogni fazione accumula un punteggio da 0 a 4 durante la sessione.
+Il punteggio totale dei quattro tavoli (0--16) determina l'esito
+finale della notte del Vespro.
+
+\nota{Per il GM Coordinatore}{
+  Il GM coordinatore tiene traccia dei punteggi di tutti i tavoli su una
+  scheda centrale. I punteggi non vengono rivelati ai giocatori durante
+  la sessione: sono la misura di ciò che sta accadendo fuori scena.
+  Ogni tavolo sa solo quello che il suo GM comunica narrativamente.
+}
+
+\subsection{Momenti di Congiunzione}
+
+In tre momenti della sessione il GM coordinatore comunica a tutti i tavoli
+un \textbf{Evento Condiviso}: una notizia o conseguenza delle azioni
+degli altri tavoli che entra nella narrativa di ciascun gruppo.
+
+\begin{enumerate}[nosep]
+  \item \textbf{La Voce} (dopo 45 min) — una notizia che cambia il quadro
+  \item \textbf{La Crisi} (dopo 90 min) — qualcosa va storto su scala cittadina
+  \item \textbf{Le Campane} (dopo 150 min) — la processione di Santo Spirito
+    sta per cominciare
+\end{enumerate}
+
+\subsection{Il Bot Telegram}
+
+\nota[Comandi Bot]{
+  \texttt{/punteggio [fazione] [0-4]} — aggiorna punteggio fazione\\
+  \texttt{/evento [testo]} — invia evento condiviso a tutti i tavoli\\
+  \texttt{/totale} — mostra punteggio aggregato (solo coordinatore)\\
+  \texttt{/stato} — mostra stato corrente di tutti i tavoli
+}
+
+\secsep
+
+\section{Componenti Fisici Opzionali}
+
+\textit{Vespri 1282} si gioca benissimo con carta e matita. Ma per una
+sessione dal vivo — soprattutto un evento serale a più tavoli — alcuni
+componenti fisici rendono le meccaniche tangibili. Sono del tutto
+opzionali e non cambiano le regole: rendono solo visibile ciò che accade.
+
+\nota[Props consigliati]{
+  \textbf{Gettoni Stress} — nove pietre scure per giocatore, da posare
+  sulle caselle Stress della scheda. La scheda resta il riferimento;
+  i gettoni rendono visibile il peso che il personaggio porta.\\[4pt]
+  \textbf{Gettoni Passione} — cinque perline rosse per giocatore, per
+  chi usa il layer Passionale (vedi «La Passione dei Vespri»). Spendere
+  Fortuna, resistere o entrare in Crisi diventano gesti visibili al tavolo.\\[4pt]
+  \textbf{Nastri delle Connessioni} — un nastro o cordoncino per ogni
+  Connessione Passionale dichiarata. Un nastro teso fra due tavoli
+  segnala a tutta la sala che qualcosa li lega.
+}
+
+Bastano due colori di gettoni: la Fortuna spende Stress, non serve un
+terzo tipo. Tieni le forbici per i nastri alla postazione del
+coordinatore, non ai tavoli: recidere un legame dev'essere un momento
+deliberato.
+
+\filettodoppio
+
+%% VERSIONE INGLESE

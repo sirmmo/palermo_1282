@@ -1,0 +1,38 @@
+%% ============================================================
+%% en/preamble_en.tex
+%% Impostazioni lingua + comandi localizzati EN
+%% ============================================================
+
+\usepackage{polyglossia}
+\setmainlanguage{english}
+
+\input{../shared/preamble_shared}
+
+%% — Etichette localizzate per stat block —
+\newcommand{\PlaybookAttrA}{Heart}
+\newcommand{\PlaybookAttrB}{Mind}
+\newcommand{\PlaybookAttrC}{Body}
+\newcommand{\PlaybookAttrD}{Spirit}
+
+%% — Sovrascrittura etichette —
+\renewcommand{\nota}[2][GM Note]{%
+  \begin{gmnote}%
+    {\cinzel\small\color{bordoscuro} #1}\par\smallskip%
+    {\small\color{testoscuro} #2}%
+  \end{gmnote}%
+}
+\renewcommand{\regola}[2][Rule]{%
+  \begin{regolabox}%
+    {\cinzel\small\color{oro}\bfseries #1}\par\smallskip%
+    {\small\color{testoscuro} #2}%
+  \end{regolabox}%
+}
+
+%% — Iperlink —
+\usepackage[
+  colorlinks=true, linkcolor=oro,
+  urlcolor=ororosso, citecolor=grigionote,
+  pdftitle={Vespri 1282},
+  pdfsubject={FitD one-shot — The Sicilian Vespers},
+  pdflang={en}
+]{hyperref}

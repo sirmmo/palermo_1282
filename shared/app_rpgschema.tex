@@ -1,0 +1,279 @@
+%% ============================================================
+%% app_rpgschema.tex — Integrazione rpg-schema.org e FitD
+%% ============================================================
+
+\chapter{Integrazione rpg-schema.org}
+\markboth{rpg-schema.org}{rpg-schema.org}
+
+\lettrine[lines=3]{Q}{uesta} appendice fornisce la rappresentazione
+semantica formale di \textit{Vespri 1282} in RDF/Turtle, usando
+il vocabolario \textbf{rpg-schema.org} con estensioni per FitD
+(\texttt{fitd:}) e per i dati storici (\texttt{ohm:}).
+
+Il codice qui riportato è copiabile direttamente e compatibile
+con i sistemi OntoRAG e TTT (TableTopTranscriber).
+
+\section{Prefissi e Namespace}
+
+\begin{verbatim}
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix rpg:    <https://rpg-schema.org/> .
+@prefix fitd:   <https://rpg-schema.org/fitd/> .
+@prefix v1282:  <https://openhistorymap.org/vespri1282/> .
+@prefix ohm:    <https://openhistorymap.org/ontology/> .
+@prefix schema: <https://schema.org/> .
+\end{verbatim}
+
+\section{Il Gioco}
+
+\begin{verbatim}
+v1282:game a rpg:Game ;
+  rdfs:label "Vespri 1282"@it ,
+             "Vespri 1282"@en ;
+  rpg:system fitd:FitD ;
+  rpg:playerCount "28-35"^^xsd:string ;
+  rpg:tableCount "4"^^xsd:integer ;
+  rpg:language "it" , "en" ;
+  rpg:setting v1282:setting_palermo1282 ;
+  ohm:historicalPeriod "1282-02-01/1282-03-31"^^xsd:string ;
+  schema:datePublished "2025"^^xsd:gYear .
+
+v1282:setting_palermo1282 a rpg:Setting , ohm:HistoricalPlace ;
+  rdfs:label "Palermo, febbraio-marzo 1282"@it ,
+             "Palermo, February-March 1282"@en ;
+  ohm:location <https://openhistorymap.org/place/palermo> ;
+  ohm:period "1282"^^xsd:gYear .
+\end{verbatim}
+
+\section{Il Sistema FitD}
+
+\begin{verbatim}
+fitd:FitD a rpg:RuleSystem ;
+  rdfs:label "Forged in the Dark"@en ;
+  rdfs:seeAlso <https://bladesinthedark.com/> ;
+  rpg:creator "John Harper" .
+
+v1282:actionSystem a fitd:ActionSystem ;
+  fitd:attribute v1282:attr_cuore ,
+                 v1282:attr_mente ,
+                 v1282:attr_corpo ,
+                 v1282:attr_spirito .
+
+v1282:attr_cuore a fitd:Attribute ;
+  rdfs:label "Cuore"@it , "Heart"@en ;
+  fitd:action v1282:action_aizzare ,
+              v1282:action_resistere ,
+              v1282:action_sfidare .
+
+v1282:attr_mente a fitd:Attribute ;
+  rdfs:label "Mente"@it , "Mind"@en ;
+  fitd:action v1282:action_studiare ,
+              v1282:action_tramare ,
+              v1282:action_ingannare .
+
+v1282:attr_corpo a fitd:Attribute ;
+  rdfs:label "Corpo"@it , "Body"@en ;
+  fitd:action v1282:action_agire ,
+              v1282:action_combattere ,
+              v1282:action_manovrare .
+
+v1282:attr_spirito a fitd:Attribute ;
+  rdfs:label "Spirito"@it , "Spirit"@en ;
+  fitd:action v1282:action_comandare ,
+              v1282:action_persuadere ,
+              v1282:action_invocare .
+
+v1282:action_aizzare a fitd:Action ;
+  rdfs:label "Aizzare"@it , "Incite"@en ;
+  fitd:attribute v1282:attr_cuore .
+
+v1282:action_resistere a fitd:Action ;
+  rdfs:label "Resistere"@it , "Resist"@en ;
+  fitd:attribute v1282:attr_cuore .
+
+v1282:action_sfidare a fitd:Action ;
+  rdfs:label "Sfidare"@it , "Defy"@en ;
+  fitd:attribute v1282:attr_cuore .
+
+v1282:action_studiare a fitd:Action ;
+  rdfs:label "Studiare"@it , "Study"@en ;
+  fitd:attribute v1282:attr_mente .
+
+v1282:action_tramare a fitd:Action ;
+  rdfs:label "Tramare"@it , "Plot"@en ;
+  fitd:attribute v1282:attr_mente .
+
+v1282:action_ingannare a fitd:Action ;
+  rdfs:label "Ingannare"@it , "Deceive"@en ;
+  fitd:attribute v1282:attr_mente .
+
+v1282:action_agire a fitd:Action ;
+  rdfs:label "Agire"@it , "Act"@en ;
+  fitd:attribute v1282:attr_corpo .
+
+v1282:action_combattere a fitd:Action ;
+  rdfs:label "Combattere"@it , "Fight"@en ;
+  fitd:attribute v1282:attr_corpo .
+
+v1282:action_manovrare a fitd:Action ;
+  rdfs:label "Manovrare"@it , "Manoeuvre"@en ;
+  fitd:attribute v1282:attr_corpo .
+
+v1282:action_comandare a fitd:Action ;
+  rdfs:label "Comandare"@it , "Command"@en ;
+  fitd:attribute v1282:attr_spirito .
+
+v1282:action_persuadere a fitd:Action ;
+  rdfs:label "Persuadere"@it , "Persuade"@en ;
+  fitd:attribute v1282:attr_spirito .
+
+v1282:action_invocare a fitd:Action ;
+  rdfs:label "Invocare"@it , "Invoke"@en ;
+  fitd:attribute v1282:attr_spirito .
+\end{verbatim}
+
+\section{Le Fazioni}
+
+\begin{verbatim}
+v1282:faction_congiurati a rpg:Faction ;
+  rdfs:label "I Congiurati"@it , "The Conspirators"@en ;
+  rpg:tableIndex 1 ;
+  v1282:entryMode "in_medias_res" ;
+  v1282:scoreMin 0 ;
+  v1282:scoreMax 4 ;
+  v1282:historicalBasis v1282:npc_da_procida .
+
+v1282:faction_baroni a rpg:Faction ;
+  rdfs:label "I Baroni Siciliani"@it , "The Sicilian Barons"@en ;
+  rpg:tableIndex 2 ;
+  v1282:entryMode "recruited" ;
+  v1282:scoreMin 0 ;
+  v1282:scoreMax 4 .
+
+v1282:faction_clero a rpg:Faction ;
+  rdfs:label "Il Clero"@it , "The Clergy"@en ;
+  rpg:tableIndex 3 ;
+  v1282:entryMode "mixed" ;
+  v1282:scoreMin 0 ;
+  v1282:scoreMax 4 .
+
+v1282:faction_popolo a rpg:Faction ;
+  rdfs:label "Il Popolo"@it , "The People"@en ;
+  rpg:tableIndex 4 ;
+  v1282:entryMode "dragged_in" ;
+  v1282:scoreMin 0 ;
+  v1282:scoreMax 4 .
+\end{verbatim}
+
+\section{I Playbook (campione)}
+
+\begin{verbatim}
+v1282:playbook_messaggero a fitd:Playbook ;
+  rdfs:label "Il Messaggero"@it , "The Messenger"@en ;
+  rpg:faction v1282:faction_congiurati ;
+  fitd:peakAction v1282:action_manovrare ,
+                  v1282:action_ingannare ;
+  fitd:secondaryAction v1282:action_studiare ,
+                       v1282:action_agire ,
+                       v1282:action_persuadere ,
+                       v1282:action_resistere ;
+  v1282:gift v1282:gift_volti_multipli ;
+  v1282:burden v1282:burden_la_catena .
+
+v1282:gift_volti_multipli a v1282:Gift ;
+  rdfs:label "Volti multipli"@it , "Multiple Faces"@en ;
+  v1282:affectsAction v1282:action_ingannare .
+
+v1282:burden_la_catena a v1282:Burden ;
+  rdfs:label "La catena"@it , "The Chain"@en .
+
+v1282:playbook_artigiano a fitd:Playbook ;
+  rdfs:label "L'Artigiano"@it , "The Craftsman"@en ;
+  rpg:faction v1282:faction_popolo ;
+  fitd:peakAction v1282:action_agire ,
+                  v1282:action_combattere ;
+  fitd:secondaryAction v1282:action_resistere ,
+                       v1282:action_manovrare ,
+                       v1282:action_sfidare ,
+                       v1282:action_aizzare .
+\end{verbatim}
+
+\section{Gli NPC Storici}
+
+\begin{verbatim}
+v1282:npc_da_procida a rpg:NPC , ohm:HistoricalPerson ;
+  rdfs:label "Giovanni da Procida"@it , "Giovanni da Procida"@en ;
+  ohm:birthYear "1210"^^xsd:gYear ;
+  ohm:deathYear "1298"^^xsd:gYear ;
+  ohm:role "Physician, jurist, diplomat, conspirator"@en ;
+  rpg:faction v1282:faction_congiurati ;
+  rpg:attribute [
+    rpg:name v1282:attr_cuore ; rpg:value 3
+  ] , [
+    rpg:name v1282:attr_mente ; rpg:value 4
+  ] , [
+    rpg:name v1282:attr_corpo ; rpg:value 1
+  ] , [
+    rpg:name v1282:attr_spirito ; rpg:value 3
+  ] ;
+  owl:sameAs <https://www.wikidata.org/entity/Q982785> .
+
+v1282:npc_de_saint_remy a rpg:NPC , ohm:HistoricalPerson ;
+  rdfs:label "Jean de Saint-Rémy"@it , "Jean de Saint-Rémy"@en ;
+  ohm:role "Giustiziere regio di Palermo"@it ,
+           "Royal Justiciar of Palermo"@en ;
+  rpg:faction v1282:faction_angioini ;
+  v1282:hasSpecialMechanic v1282:clock_de_saint_remy .
+
+v1282:clock_de_saint_remy a v1282:Clock ;
+  rdfs:label "Orologio di De Saint-Rémy"@it ,
+             "De Saint-Rémy Clock"@en ;
+  v1282:segments 6 ;
+  v1282:triggerEffect v1282:effect_stato_di_emergenza .
+
+v1282:npc_alaimo_da_lentini a rpg:NPC , ohm:HistoricalPerson ;
+  rdfs:label "Alaimo da Lentini"@it , "Alaimo da Lentini"@en ;
+  ohm:role "Barone siciliano"@it , "Sicilian Baron"@en ;
+  rpg:faction v1282:faction_baroni ;
+  owl:sameAs <https://www.wikidata.org/entity/Q3603671> .
+\end{verbatim}
+
+\section{Il Sistema di Esiti}
+
+\begin{verbatim}
+v1282:outcomeSystem a v1282:OutcomeSystem ;
+  v1282:minScore 0 ;
+  v1282:maxScore 16 ;
+  v1282:outcome v1282:outcome_silenzio ,
+                v1282:outcome_scintilla ,
+                v1282:outcome_vespro ,
+                v1282:outcome_insurrezione .
+
+v1282:outcome_silenzio a v1282:Outcome ;
+  rdfs:label "La Notte del Silenzio"@it ,
+             "The Night of Silence"@en ;
+  v1282:scoreMin 0 ;
+  v1282:scoreMax 4 .
+
+v1282:outcome_scintilla a v1282:Outcome ;
+  rdfs:label "La Scintilla Spenta"@it ,
+             "The Spark Extinguished"@en ;
+  v1282:scoreMin 5 ;
+  v1282:scoreMax 8 .
+
+v1282:outcome_vespro a v1282:Outcome ;
+  rdfs:label "Il Vespro"@it , "The Vespers"@en ;
+  v1282:scoreMin 9 ;
+  v1282:scoreMax 12 ;
+  v1282:historicallyAttested true .
+
+v1282:outcome_insurrezione a v1282:Outcome ;
+  rdfs:label "L'Insurrezione"@it , "The Insurrection"@en ;
+  v1282:scoreMin 13 ;
+  v1282:scoreMax 16 .
+\end{verbatim}
+
+\filettodoppio

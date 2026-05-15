@@ -1,0 +1,36 @@
+# LaTeX build artefacts
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.idx
+*.ilg
+*.ind
+*.nav
+*.snm
+*.vrb
+*.xdv
+*.run.xml
+*.bcf
+*.dvi
+
+# PDFs are built by CI and attached to releases
+*.pdf
+
+# Old bundled archive (CI rebuilds the manual)
+Palermo_1282.zip
+
+# Editor / OS
+.DS_Store
+*.swp
+*~
+
+# Local Claude Code settings
+.claude/

@@ -1,0 +1,98 @@
+%% ============================================================
+%% en/main_en.tex
+%% VESPRI 1282 — English Version
+%% Compile with: xelatex main_en.tex (from en/ folder)
+%% ============================================================
+
+\documentclass[12pt, twoside, openright]{memoir}
+\input{preamble_en}
+
+\begin{document}
+
+%% ---- COVER ----
+\begin{titlingpage}
+  \vspace*{2cm}
+  \begin{center}
+    \textcolor{oro}{\pgfornament[width=3cm]{15}}
+    \hspace{12pt}
+    \textcolor{oro}{\pgfornament[width=3cm,symmetry=h]{15}}
+    \vspace{1cm}
+
+    {\cinzeldeco\fontsize{52}{56}\selectfont\color{oro} VESPRI}
+
+    \vspace{0.3cm}
+    \filettodoppio
+
+    {\cinzel\fontsize{28}{32}\selectfont\color{grigionote} 1282}
+
+    \filettodoppio
+    \vspace{0.5cm}
+
+    {\itshape\large\color{grigionote}
+      A conspiracy at the threshold of uprising}
+
+    \vspace{1.2cm}
+    \textcolor{oro!50}{\pgfornament[width=5cm]{88}}
+
+    \vspace{1.2cm}
+    {\cinzel\small\color{grigionote}
+      Forged in the Dark one-shot · 4 tables · 28--35 players}
+
+    \vfill
+    {\cinzel\footnotesize\color{oro!60}
+      \textit{Palermo, February--March 1282}}
+  \end{center}
+\end{titlingpage}
+
+%% ---- CREDITS ----
+\cleardoublepage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+  \textcolor{oro}{\pgfornament[width=1.5cm]{15}}
+\end{center}
+\vspace{1cm}
+{\small\color{grigionote}
+\noindent\textit{This manual is released under Creative Commons
+Attribution-ShareAlike 4.0 International (CC BY-SA 4.0).}
+
+\medskip
+\noindent\textbf{Forged in the Dark} is a game system created by
+John Harper. \textit{Vespri 1282} is an unofficial derivative work,
+not affiliated with Evil Hat Productions.
+
+\medskip
+\noindent\textbf{OpenHistoryMap} --- \url{https://openhistorymap.org}\\
+\textbf{rpg-schema.org} --- \url{https://rpg-schema.org}
+}
+\vspace*{\fill}
+
+%% ---- TABLE OF CONTENTS ----
+\cleardoublepage
+\tableofcontents
+
+%% ============================================================
+\part{The Context}
+\input{sections/01_storica}
+
+%% ============================================================
+\part{The Game}
+\input{sections/02_regole}
+\input{sections/03_fazioni}
+\input{sections/04_playbook}
+\input{sections/05_npc}
+\input{sections/06_esiti}
+\input{sections/08_passione}
+
+%% ============================================================
+\part{Public History}
+\input{sections/07_public_history}
+
+%% ============================================================
+\appendix
+\input{sections/appendici/app_storica}
+\input{../shared/app_rpgschema}
+\input{../shared/app_ohm}
+\input{sections/appendici/glossary}
+
+\end{document}

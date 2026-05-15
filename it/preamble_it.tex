@@ -1,0 +1,24 @@
+%% ============================================================
+%% it/preamble_it.tex
+%% Impostazioni lingua + comandi localizzati IT
+%% ============================================================
+
+\usepackage{polyglossia}
+\setmainlanguage{italian}
+
+\input{../shared/preamble_shared}
+
+%% — Etichette localizzate per stat block —
+\newcommand{\PlaybookAttrA}{Cuore}
+\newcommand{\PlaybookAttrB}{Mente}
+\newcommand{\PlaybookAttrC}{Corpo}
+\newcommand{\PlaybookAttrD}{Spirito}
+
+%% — Iperlink —
+\usepackage[
+  colorlinks=true, linkcolor=oro,
+  urlcolor=ororosso, citecolor=grigionote,
+  pdftitle={Vespri 1282},
+  pdfsubject={One-shot FitD — I Vespri Siciliani},
+  pdflang={it}
+]{hyperref}

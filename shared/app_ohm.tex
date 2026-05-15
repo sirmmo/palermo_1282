@@ -1,0 +1,290 @@
+%% ============================================================
+%% app_ohm.tex — Appendice OpenHistoryMap
+%% ============================================================
+
+\chapter{Appendice OpenHistoryMap}
+\markboth{OpenHistoryMap}{OpenHistoryMap}
+
+\lettrine[lines=3]{Q}{uesta} appendice fornisce i dati geografici
+storici di \textit{Vespri 1282} in formato RDF/Turtle compatibile
+con \textbf{OpenHistoryMap} (\url{https://openhistorymap.org}).
+I dati coprono Palermo in dettaglio e i principali centri siciliani
+in forma ridotta, e sono progettati come risorsa standalone
+espandibile indipendentemente dal gioco.
+
+I dati usano il sistema di coordinate WGS84. Le posizioni sono
+approssimazioni storiche basate sulla storiografia disponibile
+e sull'analisi delle planimetrie medievali.
+
+\section{Prefissi}
+
+\begin{verbatim}
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix geo:    <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix ohm:    <https://openhistorymap.org/ontology/> .
+@prefix ohmplace: <https://openhistorymap.org/place/> .
+@prefix v1282:  <https://openhistorymap.org/vespri1282/> .
+@prefix time:   <http://www.w3.org/2006/time#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+\end{verbatim}
+
+\section{Periodo Storico}
+
+\begin{verbatim}
+v1282:period_1282 a ohm:HistoricalPeriod ;
+  rdfs:label "Palermo 1282 — Vespri Siciliani"@it ,
+             "Palermo 1282 — Sicilian Vespers"@en ;
+  time:hasBeginning [ time:inXSDDate "1282-02-01"^^xsd:date ] ;
+  time:hasEnd       [ time:inXSDDate "1282-03-31"^^xsd:date ] ;
+  ohm:politicalContext "Dominio angioino / Angevin rule"@it .
+\end{verbatim}
+
+\section{Palermo — Luoghi Principali}
+
+\begin{verbatim}
+
+%% --- QUARTIERI ---
+
+ohmplace:palermo_cassaro a ohm:HistoricalQuarter ;
+  rdfs:label "Cassaro"@it , "Cassaro"@en ;
+  dcterms:description
+    "Centro storico di Palermo, sede del Palazzo dei Normanni.
+     Deriva dall'arabo al-Qasr (il castello)."@it ,
+    "Historic centre of Palermo, site of the Norman Palace.
+     Name derives from Arabic al-Qasr (the castle)."@en ;
+  geo:lat "38.1115"^^xsd:decimal ;
+  geo:long "13.3523"^^xsd:decimal ;
+  ohm:period v1282:period_1282 ;
+  ohm:ethnicity "Normanna/Francese"@it , "Norman/French"@en ;
+  v1282:narrativeRole "Sede del potere angioino"@it .
+
+ohmplace:palermo_kalsa a ohm:HistoricalQuarter ;
+  rdfs:label "Kalsa"@it , "Kalsa"@en ;
+  dcterms:description
+    "Quartiere arabo di Palermo, vicino al porto.
+     Dall'arabo al-Khalisa (la pura, l'eletta)."@it ,
+    "Arab quarter of Palermo, near the port.
+     From Arabic al-Khalisa (the pure, the chosen)."@en ;
+  geo:lat "38.1132"^^xsd:decimal ;
+  geo:long "13.3671"^^xsd:decimal ;
+  ohm:period v1282:period_1282 ;
+  ohm:ethnicity "Araba/Mista"@it , "Arab/Mixed"@en ;
+  v1282:narrativeRole "Porto e commercio"@it .
+
+ohmplace:palermo_seralcadio a ohm:HistoricalQuarter ;
+  rdfs:label "Seralcadio"@it , "Seralcadio"@en ;
+  dcterms:description
+    "Quartiere degli artigiani e mercanti."@it ,
+    "Quarter of craftsmen and merchants."@en ;
+  geo:lat "38.1145"^^xsd:decimal ;
+  geo:long "13.3544"^^xsd:decimal ;
+  ohm:period v1282:period_1282 ;
+  v1282:narrativeRole "Artigiani — fazione Popolo"@it .
+
+ohmplace:palermo_albergheria a ohm:HistoricalQuarter ;
+  rdfs:label "Albergheria"@it , "Albergheria"@en ;
+  dcterms:description
+    "Il quartiere più povero e densamente popolato di Palermo."@it ,
+    "The poorest and most densely populated quarter of Palermo."@en ;
+  geo:lat "38.1118"^^xsd:decimal ;
+  geo:long "13.3545"^^xsd:decimal ;
+  ohm:period v1282:period_1282 ;
+  v1282:narrativeRole "Ceto popolare — fazione Popolo"@it .
+
+%% --- EDIFICI E LUOGHI CHIAVE ---
+
+ohmplace:palermo_santo_spirito a ohm:HistoricalBuilding ;
+  rdfs:label "Chiesa di Santo Spirito"@it ,
+             "Church of Santo Spirito"@en ;
+  dcterms:description
+    "Chiesa normanna fuori le mura di Palermo. Teatro della
+     processione del 30 marzo 1282 e scintilla della rivolta.
+     Nota anche come 'chiesa dei Vespri'."@it ,
+    "Norman church outside the walls of Palermo. Site of the
+     Easter Monday procession of 30 March 1282 and spark of
+     the uprising. Also known as the 'church of the Vespers'."@en ;
+  geo:lat "38.1048"^^xsd:decimal ;
+  geo:long "13.3595"^^xsd:decimal ;
+  ohm:period v1282:period_1282 ;
+  ohm:buildingType "chiesa"@it , "church"@en ;
+  ohm:constructionPeriod "XII sec."@it , "12th century"@en ;
+  v1282:narrativeRole "Detonatore della rivolta"@it ,
+                       "Trigger of the uprising"@en ;
+  v1282:faction v1282:faction_clero ;
+  owl:sameAs <https://www.wikidata.org/entity/Q3960295> .
+
+ohmplace:palermo_normanni a ohm:HistoricalBuilding ;
+  rdfs:label "Palazzo dei Normanni"@it ,
+             "Norman Palace"@en ;
+  dcterms:description
+    "Sede del potere angioino a Palermo. Costruito in origine
+     dagli emiri arabi, ampliato dai Normanni, usato dagli
+     Svevi e poi dagli Angioini."@it ,
+    "Seat of Angevin power in Palermo. Originally built by Arab
+     emirs, enlarged by the Normans, used by the Hohenstaufen
+     and then the Angevins."@en ;
+  geo:lat "38.1115"^^xsd:decimal ;
+  geo:long "13.3523"^^xsd:decimal ;
+  ohm:period v1282:period_1282 ;
+  ohm:buildingType "palazzo"@it , "palace"@en ;
+  v1282:narrativeRole "Sede di Jean de Saint-Rémy"@it ;
+  owl:sameAs <https://www.wikidata.org/entity/Q848055> .
+
+ohmplace:palermo_cattedrale a ohm:HistoricalBuilding ;
+  rdfs:label "Cattedrale di Palermo"@it ,
+             "Cathedral of Palermo"@en ;
+  dcterms:description
+    "Sede dell'arcivescovo di Palermo. Fondata dai Normanni
+     su una precedente moschea araba."@it ,
+    "Seat of the Archbishop of Palermo. Founded by the Normans
+     on a previous Arab mosque."@en ;
+  geo:lat "38.1129"^^xsd:decimal ;
+  geo:long "13.3517"^^xsd:decimal ;
+  ohm:period v1282:period_1282 ;
+  ohm:buildingType "cattedrale"@it , "cathedral"@en ;
+  v1282:narrativeRole "Sede dell'arcivescovo — fazione Clero"@it ;
+  owl:sameAs <https://www.wikidata.org/entity/Q847497> .
+
+ohmplace:palermo_porto a ohm:HistoricalPlace ;
+  rdfs:label "Porto di Palermo"@it , "Port of Palermo"@en ;
+  dcterms:description
+    "Porto principale di Palermo. Nel 1282 sede della flotta
+     di Carlo d'Angiò in allestimento per la spedizione
+     contro Bisanzio."@it ,
+    "Main port of Palermo. In 1282, site of Charles of Anjou's
+     fleet being assembled for the expedition against Byzantium."@en ;
+  geo:lat "38.1200"^^xsd:decimal ;
+  geo:long "13.3700"^^xsd:decimal ;
+  ohm:period v1282:period_1282 ;
+  v1282:narrativeRole "Flotta angioina — punto critico"@it .
+
+ohmplace:palermo_mercato a ohm:HistoricalPlace ;
+  rdfs:label "Mercato della Kalsa"@it , "Kalsa Market"@en ;
+  dcterms:description
+    "Mercato principale del quartiere Kalsa. Centro della
+     vita quotidiana e delle voci della città."@it ,
+    "Main market of the Kalsa quarter. Centre of daily life
+     and city rumours."@en ;
+  geo:lat "38.1138"^^xsd:decimal ;
+  geo:long "13.3660"^^xsd:decimal ;
+  ohm:period v1282:period_1282 ;
+  v1282:narrativeRole "Informazioni — fazione Popolo"@it .
+\end{verbatim}
+
+\section{Altri Centri Siciliani}
+
+\begin{verbatim}
+ohmplace:messina_1282 a ohm:HistoricalCity ;
+  rdfs:label "Messina (1282)"@it , "Messina (1282)"@en ;
+  dcterms:description
+    "Secondo centro della Sicilia. La rivolta si estese
+     a Messina dopo i Vespri di Palermo. Porta verso
+     la Calabria e il continente."@it ,
+    "Second city of Sicily. The uprising spread to Messina
+     after the Palermo Vespers. Gateway to Calabria and
+     the mainland."@en ;
+  geo:lat "38.1938"^^xsd:decimal ;
+  geo:long "15.5540"^^xsd:decimal ;
+  ohm:period v1282:period_1282 ;
+  v1282:narrativeRole "Canale verso la Sicilia orientale"@it ;
+  owl:sameAs <https://www.wikidata.org/entity/Q16"> .
+
+ohmplace:corleone_1282 a ohm:HistoricalCity ;
+  rdfs:label "Corleone (1282)"@it , "Corleone (1282)"@en ;
+  dcterms:description
+    "Centro dell'entroterra siciliano. Partecipò attivamente
+     alla rivolta dopo il 30 marzo."@it ,
+    "Town in the Sicilian interior. Actively participated in
+     the uprising after 30 March."@en ;
+  geo:lat "37.8145"^^xsd:decimal ;
+  geo:long "13.0693"^^xsd:decimal ;
+  ohm:period v1282:period_1282 .
+
+ohmplace:trapani_1282 a ohm:HistoricalCity ;
+  rdfs:label "Trapani (1282)"@it , "Trapani (1282)"@en ;
+  dcterms:description
+    "Porto occidentale della Sicilia. Punto di sbarco
+     potenziale per truppe aragonesi."@it ,
+    "Western port of Sicily. Potential landing point
+     for Aragonese forces."@en ;
+  geo:lat "38.0176"^^xsd:decimal ;
+  geo:long "12.5140"^^xsd:decimal ;
+  ohm:period v1282:period_1282 .
+
+ohmplace:siracusa_1282 a ohm:HistoricalCity ;
+  rdfs:label "Siracusa (1282)"@it , "Syracuse (1282)"@en ;
+  dcterms:description
+    "Centro storico della Sicilia sud-orientale.
+     Antica capitale greca e bizantina."@it ,
+    "Historic centre of south-eastern Sicily.
+     Ancient Greek and Byzantine capital."@en ;
+  geo:lat "37.0755"^^xsd:decimal ;
+  geo:long "15.2866"^^xsd:decimal ;
+  ohm:period v1282:period_1282 .
+
+ohmplace:agrigento_1282 a ohm:HistoricalCity ;
+  rdfs:label "Agrigento (1282)"@it , "Agrigento (1282)"@en ;
+  dcterms:description
+    "Centro del versante meridionale. Sede vescovile."@it ,
+    "Centre of the southern coast. Episcopal seat."@en ;
+  geo:lat "37.3111"^^xsd:decimal ;
+  geo:long "13.5765"^^xsd:decimal ;
+  ohm:period v1282:period_1282 .
+
+ohmplace:catania_1282 a ohm:HistoricalCity ;
+  rdfs:label "Catania (1282)"@it , "Catania (1282)"@en ;
+  dcterms:description
+    "Secondo porto della Sicilia orientale, ai piedi
+     dell'Etna."@it ,
+    "Second port of eastern Sicily, at the foot of Etna."@en ;
+  geo:lat "37.5023"^^xsd:decimal ;
+  geo:long "15.0873"^^xsd:decimal ;
+  ohm:period v1282:period_1282 .
+\end{verbatim}
+
+\section{Itinerari Narrativi}
+
+\begin{verbatim}
+%% Itinerario: La processione di Santo Spirito
+
+v1282:route_processione a ohm:HistoricalRoute ;
+  rdfs:label "Processione di Santo Spirito — 30 marzo 1282"@it ,
+             "Santo Spirito Procession — 30 March 1282"@en ;
+  ohm:startPoint ohmplace:palermo_cattedrale ;
+  ohm:endPoint ohmplace:palermo_santo_spirito ;
+  ohm:period v1282:period_1282 ;
+  dcterms:description
+    "Percorso della processione pasquale dalla cattedrale
+     alla chiesa di Santo Spirito, teatro dei Vespri."@it .
+
+%% Itinerario: Rete dei congiurati
+
+v1282:network_congiurati a ohm:HistoricalNetwork ;
+  rdfs:label "Rete dei Congiurati"@it ,
+             "Conspirators' Network"@en ;
+  ohm:node ohmplace:palermo_kalsa ,
+           ohmplace:messina_1282 ,
+           ohmplace:trapani_1282 ;
+  ohm:period v1282:period_1282 ;
+  dcterms:description
+    "Rete di comunicazione clandestina della cospirazione
+     aragonese in Sicilia."@it .
+\end{verbatim}
+
+\section{Note Metodologiche}
+
+Le coordinate geografiche di questa appendice sono approssimazioni
+storico-topografiche. Palermo medievale aveva una planimetria
+diversa da quella odierna, ma il nucleo del Cassaro e la posizione
+della Kalsa rispetto al porto sono sostanzialmente confermati
+dalla storiografia e dall'archeologia urbana.
+
+Per integrare questi dati in OpenHistoryMap, importare il file
+Turtle in un endpoint SPARQL compatibile con GeoSPARQL.
+I dati sono rilasciati sotto licenza \textbf{CC BY 4.0}.
+
+\filettodoppio
