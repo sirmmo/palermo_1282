@@ -106,7 +106,7 @@ jobs:
           unzip -o /tmp/butler.zip -d /usr/local/bin
           chmod +x /usr/local/bin/butler
           butler -V
-          butler push out/vespri_1282_it.pdf     sirmmo/palermo-1282:manual-it --userversion "$TAG"
-          butler push out/vespri_1282_en.pdf     sirmmo/palermo-1282:manual-en --userversion "$TAG"
-          butler push out/vespri_1282_schede.pdf sirmmo/palermo-1282:sheets    --userversion "$TAG"
-          butler push out/vespri_1282_master.pdf sirmmo/palermo-1282:master    --userversion "$TAG"
+          butler push out/vespri_1282_it.pdf     sirmmo/vespri-1282:manual-it --userversion "$TAG"
+          butler push out/vespri_1282_en.pdf     sirmmo/vespri-1282:manual-en --userversion "$TAG"
+          butler push out/vespri_1282_schede.pdf sirmmo/vespri-1282:sheets    --userversion "$TAG"
+          butler push out/vespri_1282_master.pdf sirmmo/vespri-1282:master    --userversion "$TAG"
