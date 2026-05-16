@@ -4,6 +4,13 @@
 %% Non include polyglossia né setmainlanguage.
 %% ============================================================
 
+%% — Edition switch —
+%% Default to the IT edition. en/preamble_en.tex sets \englisheditiontrue
+%% after loading this file. Shared files (appendices) can branch on the
+%% current edition via \editiontitle{IT text}{EN text}.
+\newif\ifenglishedition
+\newcommand{\editiontitle}[2]{\ifenglishedition #2\else #1\fi}
+
 %% — Font —
 %% The *-Style filename shorthand (UprightFont=*-Regular, …) breaks for
 %% families whose name contains a space when the on-disk files have no
