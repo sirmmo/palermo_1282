@@ -34,3 +34,7 @@ Palermo_1282.zip
 
 # Local Claude Code settings
 .claude/
+
+# Private event-prep materials (named-player handouts, GM notes, etc.)
+# Keep these on disk only; do not push real-name handouts to the public repo.
+event/
