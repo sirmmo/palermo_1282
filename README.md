@@ -14,7 +14,7 @@ vespri1282/
 │       ├── 01_storica.tex       Contestualizzazione storica (~10pp)
 │       ├── 02_regole.tex        Regole FitD adattate
 │       ├── 03_fazioni.tex       Le 4 fazioni
-│       ├── 04_playbook.tex      28 playbook (7×4)
+│       ├── 04_playbook.tex      32 playbook (8×4)
 │       ├── 05_npc.tex           NPC storici con stat block
 │       ├── 06_esiti.tex         Sistema punteggi 0–16
 │       ├── 07_public_history.tex Guida uso scolastico (licei)
@@ -69,7 +69,7 @@ xelatex schede_vespri.tex && xelatex schede_vespri.tex
 | Contestualizzazione storica | ✓ | ✓ |
 | Regole FitD adattate | ✓ | ✓ |
 | 4 fazioni con punteggi | ✓ | ✓ |
-| 28 playbook tematici storici | ✓ | ✓ |
+| 32 playbook tematici storici (8×fazione) | ✓ | ✓ |
 | NPC storici (stat block) | ✓ | ✓ |
 | Sistema esiti 0–16 | ✓ | ✓ |
 | Guida public history (licei) | ✓ | ✓ |
