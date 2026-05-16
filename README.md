@@ -36,7 +36,8 @@ vespri1282/
 │   ├── app_rpgschema.tex        RDF/Turtle — rpg-schema.org
 │   └── app_ohm.tex              RDF/Turtle — OpenHistoryMap
 │
-└── schede_vespri.tex            32 schede personaggio A4 (8 per fazione)
+├── schede_vespri.tex            32 schede personaggio A4 (8 per fazione)
+└── scheda_master.tex            1 pagina A4 — reference GM (master)
 ```
 
 ## Compilazione
@@ -50,6 +51,9 @@ cd en && xelatex main_en.tex && xelatex main_en.tex
 
 # Schede personaggio (dalla root)
 xelatex schede_vespri.tex && xelatex schede_vespri.tex
+
+# Scheda master (GM reference, 1 pagina A4)
+xelatex scheda_master.tex && xelatex scheda_master.tex
 ```
 
 > Doppia compilazione necessaria per indice e riferimenti interni.
@@ -79,6 +83,7 @@ xelatex schede_vespri.tex && xelatex schede_vespri.tex
 | App. rpg-schema.org (RDF) | shared | shared |
 | App. OpenHistoryMap (RDF) | shared | shared |
 | 32 schede personaggio A4 | standalone | standalone |
+| Scheda master GM (1 pag.) | standalone | standalone |
 
 ## Crediti
 

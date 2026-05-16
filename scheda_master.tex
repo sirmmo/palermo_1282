@@ -1,0 +1,229 @@
+%% ============================================================
+%% scheda_master.tex — Vespri 1282 GM reference (1 page A4)
+%% XeLaTeX standalone
+%% ============================================================
+\documentclass[10pt]{article}
+
+\usepackage{fontspec}
+\setmainfont{EB Garamond}[Ligatures=TeX]
+\newfontfamily\cinzel{Cinzel}
+\newfontfamily\cinzeldeco{Cinzel Decorative}
+
+\usepackage[a4paper,top=8mm,bottom=8mm,left=10mm,right=10mm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{mdframed}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{tabularx}
+\usepackage{array}
+
+\definecolor{oro}{HTML}{B8860B}
+\definecolor{ororosso}{HTML}{C47B1A}
+\definecolor{pergamena}{HTML}{F5EDD6}
+\definecolor{bordoscuro}{HTML}{7A5C1E}
+\definecolor{testoscuro}{HTML}{2A1F0A}
+\definecolor{grigionote}{HTML}{5A4A2A}
+\definecolor{fazCong}{HTML}{7B2D2D}
+\definecolor{fazBar}{HTML}{2D5A2D}
+\definecolor{fazCle}{HTML}{1B3A5C}
+\definecolor{fazPop}{HTML}{8B4513}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\color{testoscuro}
+
+%% — Section heading inside a panel —
+\newcommand{\sez}[1]{%
+  {\cinzel\fontsize{7.5}{9}\selectfont\color{oro}\bfseries\MakeUppercase{#1}}\par
+  \vspace{0.5pt}{\color{oro!50}\rule{\linewidth}{0.4pt}}\par\vspace{2pt}%
+}
+\newcommand{\sezcol}[2]{%
+  {\cinzel\fontsize{7.5}{9}\selectfont\color{#1}\bfseries\MakeUppercase{#2}}\par
+  \vspace{0.5pt}{\color{#1!50}\rule{\linewidth}{0.4pt}}\par\vspace{2pt}%
+}
+\newcommand{\lbl}[1]{{\cinzel\fontsize{7.5}{9}\selectfont\color{bordoscuro}\bfseries #1}}
+\newcommand{\plus}{\textcolor{oro}{\textbf{+1}}}
+\newcommand{\minus}{\textcolor{ororosso}{\textbf{-1}}}
+
+%% — Faction scoring panel —
+\newcommand{\fazpanel}[3]{%
+  \begin{mdframed}[backgroundcolor=#1!7,linecolor=#1,linewidth=0.5pt,
+    roundcorner=3pt,innerleftmargin=5pt,innerrightmargin=5pt,
+    innertopmargin=3pt,innerbottommargin=4pt,skipabove=0pt,skipbelow=0pt]
+    \sezcol{#1}{#2}%
+    {\fontsize{7.5}{9.2}\selectfont #3}%
+  \end{mdframed}%
+}
+
+\begin{document}
+
+%% ─── BORDER ─────────────────────────────────────────
+\begin{tikzpicture}[remember picture,overlay]
+  \draw[oro,line width=1pt,rounded corners=3pt]
+    ($(current page.north west)+(5mm,-5mm)$)
+    rectangle($(current page.south east)+(-5mm,5mm)$);
+\end{tikzpicture}%
+
+%% ─── HEADER ─────────────────────────────────────────
+\vspace*{-3mm}
+\noindent\begin{minipage}[c]{0.66\linewidth}
+  {\cinzeldeco\fontsize{19}{21}\selectfont\color{oro} VESPRI 1282}\\[1pt]
+  {\cinzel\fontsize{8}{10}\selectfont\color{grigionote}
+    Scheda Master · GM Reference Sheet}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.32\linewidth}\raggedleft
+  {\fontsize{7.5}{9.5}\selectfont\color{grigionote}\itshape
+    Palermo, marzo 1282\,·\,4 tavoli\\
+    28--32 giocatori · sessione ${\sim}$3h45\\
+    (es.\ 23:00 $\rightarrow$ ${\sim}$02:45)}
+\end{minipage}
+\par\vspace{2pt}{\color{oro}\rule{\linewidth}{0.7pt}}\par
+\vspace{0.5pt}{\color{oro!40}\rule{\linewidth}{0.3pt}}\par\vspace{4pt}
+
+%% ─── FACTION SCORING GRID (2 x 2) ────────────────────
+\noindent
+\begin{minipage}[t]{0.49\linewidth}
+\fazpanel{fazCong}{Congiurati / Conspirators}{%
+  \plus{} contatto baronale attivato e affidabile\\
+  \plus{} canale con la Sicilia orientale (Messina) aperto\\
+  \plus{} identità della rete non compromessa\\
+  \plus{} segnale coordinato definito e comunicato\\
+  \minus{} ogni membro della rete catturato o ucciso\\
+  \minus{} angioini in allerta \emph{specifica} sulla cospirazione}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}
+\fazpanel{fazBar}{Baroni / Barons}{%
+  \plus{} almeno tre casate hanno preso posizione\\
+  \plus{} vassalli preparati e stanno tenendo\\
+  \plus{} canale sicuro con Congiurati o Clero\\
+  \plus{} famiglie dei PG al sicuro\\
+  \minus{} ogni casata passata dalla parte angioina\\
+  \minus{} un PG catturato o compromesso}
+\end{minipage}
+
+\vspace{3pt}
+
+\noindent
+\begin{minipage}[t]{0.49\linewidth}
+\fazpanel{fazCle}{Clero / Clergy}{%
+  \plus{} processione di Santo Spirito si svolge come previsto\\
+  \plus{} canali fra i quartieri attivi e sicuri\\
+  \plus{} Chiesa formalmente fuori dalla cospirazione\\
+  \plus{} alto prelato pronto a legittimare la rivolta a posteriori\\
+  \minus{} chierico arrestato o torturato dai francesi\\
+  \minus{} processione cancellata o militarizzata}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}
+\fazpanel{fazPop}{Popolo / People}{%
+  \plus{} quartieri popolari informati e mobilitati\\
+  \plus{} sopruso angioino documentato (detonatore)\\
+  \plus{} reti di vicinato (\textit{hara}) pronte a coordinarsi\\
+  \plus{} protetto qualcuno di vulnerabile dalla violenza\\
+  \minus{} figura chiave della comunità eliminata o intimidita\\
+  \minus{} quartieri divisi o in conflitto fra loro}
+\end{minipage}
+
+%% ─── PACING · OUTCOMES · SPECIAL OUTCOMES ────────────
+\vspace{5pt}
+\noindent
+\begin{minipage}[t]{0.40\linewidth}
+\sez{Momenti di Congiunzione}
+{\fontsize{8}{10}\selectfont
+\lbl{La Voce} ${\sim}$+45\,min · una notizia cambia il quadro\\
+\lbl{La Crisi} ${\sim}$+90\,min · qualcosa va storto a scala cittadina\\
+\lbl{Le Campane} ${\sim}$+150\,min · la processione di Santo Spirito sta per cominciare}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.27\linewidth}
+\sez{Esiti}
+{\fontsize{8}{10}\selectfont
+\begin{tabularx}{\linewidth}{@{}Xcc@{}}
+                 & \lbl{4t}  & \lbl{3t}  \\
+N.\ Silenzio     & 0--4      & 0--3      \\
+Scintilla        & 5--8      & 4--6      \\
+Il Vespro        & 9--12     & 7--9      \\
+Insurrezione     & 13--16    & 10--12    \\
+\end{tabularx}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.30\linewidth}
+\sez{Esiti speciali}
+{\fontsize{7.5}{9.2}\selectfont
+\lbl{Cong.\ 0} rete completamente smantellata\\
+\lbl{Bar.\ 4} casata nobile ottiene un titolo\\
+\lbl{Clero 4 + Sacrista vivo} le campane suonano all'alba\\
+\lbl{Pop.\ 4} nessuna ritorsione nei quartieri\\
+\lbl{Clock De Saint-Rémy pieno} leggete i nomi}
+\end{minipage}
+
+%% ─── QUICK RULES REFERENCE ───────────────────────────
+\vspace{5pt}
+\begin{mdframed}[backgroundcolor=oro!6,linecolor=oro,linewidth=0.5pt,
+  roundcorner=3pt,innerleftmargin=6pt,innerrightmargin=6pt,
+  innertopmargin=3pt,innerbottommargin=4pt,skipabove=0pt,skipbelow=0pt]
+\sez{Quick rules}
+\noindent\begin{minipage}[t]{0.27\linewidth}
+{\fontsize{8}{10}\selectfont
+\lbl{Tiro}\\
+\textbf{6} successo pieno\\
+\textbf{4--5} parziale (costo)\\
+\textbf{1--3} fallimento\\
+\lbl{0 dadi} 2d6, prendi il più basso}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.24\linewidth}
+{\fontsize{8}{10}\selectfont
+\lbl{Posizione}\\
+Controllata · Rischiosa · Disperata\\[2pt]
+\lbl{Effetto}\\
+Limitato · Standard · Eccezionale}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.23\linewidth}
+{\fontsize{8}{10}\selectfont
+\lbl{Stress / Trauma}\\
+9 caselle · 9$^a$ piena = +1 Trauma e svuota · 4 Traumi = fuori\\[2pt]
+\lbl{Traumi} Sfiducia · Ossessione · Colpa · Paura · Fede perduta}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.22\linewidth}
+{\fontsize{8}{10}\selectfont
+\lbl{Fortuna} +1d6, 2 Stress, max 3$\times$\\[2pt]
+\lbl{Resistere} tira attributo · ogni $>$3 riduce · 6 elimina · sempre +1 Stress}
+\end{minipage}
+\end{mdframed}
+
+%% ─── PASSION LAYER ──────────────────────────────────
+\vspace{4pt}
+\begin{mdframed}[backgroundcolor=ororosso!7,linecolor=ororosso,linewidth=0.5pt,
+  roundcorner=3pt,innerleftmargin=6pt,innerrightmargin=6pt,
+  innertopmargin=3pt,innerbottommargin=4pt,skipabove=0pt,skipbelow=0pt]
+{\cinzel\fontsize{8}{10}\selectfont\color{ororosso}\bfseries
+  LAYER PASSIONALE — opzionale}
+\par\vspace{0.5pt}{\color{ororosso!50}\rule{\linewidth}{0.4pt}}\par\vspace{2pt}
+
+\noindent\begin{minipage}[t]{0.49\linewidth}
+{\fontsize{8}{10}\selectfont
+\lbl{Passione} 5 caselle, separate dallo Stress.\\
+\lbl{Guadagno +1} Trigger del Ruolo · amato in pericolo per colpa tua · scegli fra causa e cuore · qualcuno scopre un tuo segreto.\\
+\lbl{Spesa 1} +1d a tiro emotivo/relazionale · Momento Drammatico · sostituisci conseguenza fisica con emotiva.\\
+\lbl{Crisi (5/5)} agisci secondo Tormento $\rightarrow$ +1 al punteggio della fazione, svuota.\\
+\lbl{Connessione spezzata} entrambi i legati +3 Passione.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}
+{\fontsize{8}{10}\selectfont
+\lbl{Legare \& Sciogliere} — solo Clero con Ruolo Passionale, 1$\times$/atto, mai sulle proprie Connessioni.\\
+\lbl{Legare (2 P)} nuova Connessione fra altri due PG/PNG; i legati scelgono la natura del legame.\\
+\lbl{Sciogliere (3 P)} spezza una Connessione fra altri due; conta come rottura (+3 Passione a entrambi).\\
+\lbl{Sempre nella finzione} confessione, benedizione, matrimonio, scomunica, verità rivelata. Senza la scena, non c'è il potere.}
+\end{minipage}
+\end{mdframed}
+
+%% ─── BOT TELEGRAM (footer) ──────────────────────────
+\vspace{3pt}
+{\fontsize{7.5}{9}\selectfont\color{grigionote}
+\lbl{Bot Telegram (coordinatore)}\quad
+\texttt{/punteggio [fazione] [0--4]}\quad
+\texttt{/evento [testo]}\quad
+\texttt{/totale}\quad
+\texttt{/stato}}
+
+\end{document}

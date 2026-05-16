@@ -64,12 +64,18 @@ jobs:
           xelatex -interaction=nonstopmode -halt-on-error schede_vespri.tex
           xelatex -interaction=nonstopmode -halt-on-error schede_vespri.tex
 
+      - name: Build GM master sheet
+        run: |
+          xelatex -interaction=nonstopmode -halt-on-error scheda_master.tex
+          xelatex -interaction=nonstopmode -halt-on-error scheda_master.tex
+
       - name: Collect PDFs
         run: |
           mkdir -p out
           cp it/main_it.pdf       out/vespri_1282_it.pdf
           cp en/main_en.pdf       out/vespri_1282_en.pdf
           cp schede_vespri.pdf    out/vespri_1282_schede.pdf
+          cp scheda_master.pdf    out/vespri_1282_master.pdf
 
       - name: Upload build artefacts
         uses: actions/upload-artifact@v4
@@ -100,3 +106,4 @@ jobs:
           butler push out/vespri_1282_it.pdf     sirmmo/palermo-1282:manual-it --userversion "$TAG"
           butler push out/vespri_1282_en.pdf     sirmmo/palermo-1282:manual-en --userversion "$TAG"
           butler push out/vespri_1282_schede.pdf sirmmo/palermo-1282:sheets    --userversion "$TAG"
+          butler push out/vespri_1282_master.pdf sirmmo/palermo-1282:master    --userversion "$TAG"
