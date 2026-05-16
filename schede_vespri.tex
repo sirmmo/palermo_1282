@@ -1,6 +1,6 @@
 %% ============================================================
 %% schede_vespri.tex — Schede personaggio Vespri 1282
-%% 28 schede A4 · XeLaTeX
+%% 32 schede A4 (8 per fazione) · XeLaTeX
 %% ============================================================
 \documentclass[12pt]{article}
 
@@ -312,6 +312,23 @@
 \fondo{Il Mercante è il tuo principale cliente. Sa troppo di te per essere solo un cliente.}
 \end{scheda}
 
+\begin{scheda}{I Congiurati}{The Conspirators}{faz}%
+  {Il Capitano di Mare}{The Sea Captain}%
+  {Riccardo della Loggia}%
+  {Tre lingue, quattro bandiere, un solo equipaggio. Quando soffia il vento giusto, sei al servizio di qualcuno.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{1}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{1}\azione{Tramare}{0}\azione{Ingannare}{1}}{%
+  \azione{Agire}{0}\azione{Combattere}{0}\azione{Manovrare}{2}}{%
+  \azione{Comandare}{2}\azione{Persuadere}{1}\azione{Invocare}{0}}
+\risorse
+\donofardello{La rotta segreta}%
+  {Una volta per sessione: via veloce e segreta per mare fra due porti che consegna un carico (lettere, denaro, una persona) senza intercettazione angioina. L'arrivo è fuori scena.}%
+  {Il porto sorvegliato}%
+  {Ogni uso avanza l'orologio «sorveglianza portuale». Quando è pieno: la tua nave viene sequestrata e non puoi più lasciare Palermo via mare.}
+\fondo{Il Mercante ti ha pagato tre traversate. Non ha ancora pagato la quarta. Voi tutti e due sapete perché.}
+\end{scheda}
+
 %% ================================================================
 %% FAZIONE II — BARONI
 %% ================================================================
@@ -434,6 +451,23 @@
   {La casa divisa}%
   {Il GM tiene un orologio segreto: ogni azione rischiosa vicino a casa lo fa avanzare. Quando è pieno: tuo marito scopre tutto.}
 \fondo{La Castellana è tua cugina. Condividete più segreti di quanto sia prudente.}
+\end{scheda}
+
+\begin{scheda}{I Baroni Siciliani}{The Barons}{faz}%
+  {La Matriarca}{The Matriarch}%
+  {Donna Margherita Lancia}%
+  {Hai sepolto due mariti. Hai sposato sei figlie. Non lasci la tua casa da undici anni. Eppure tutta Palermo viene a te.}
+\azioni{%
+  \azione{Aizzare}{0}\azione{Resistere}{1}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{1}\azione{Tramare}{2}\azione{Ingannare}{0}}{%
+  \azione{Agire}{0}\azione{Combattere}{0}\azione{Manovrare}{0}}{%
+  \azione{Comandare}{1}\azione{Persuadere}{2}\azione{Invocare}{1}}
+\risorse
+\donofardello{Il filo delle case}%
+  {Parlando di una famiglia baronale puoi dichiarare un vincolo (matrimonio, debito, torto) che la lega a casa tua. Il personaggio deve prenderlo sul serio per la scena.}%
+  {La casa attende}%
+  {Se metti la casa pubblicamente in pericolo, il GM avanza l'orologio della successione. Quando è pieno: la tua casa agisce contro la tua volontà.}
+\fondo{Il Notaio custodisce la cassetta dei tuoi documenti privati. Sa quasi tutto. Il quasi è ciò che conta.}
 \end{scheda}
 
 %% ================================================================
@@ -560,6 +594,23 @@
 \fondo{Il Frate Predicatore ti ha dato da mangiare il primo giorno. Gli hai detto il tuo nome vero. Nessun altro lo sa.}
 \end{scheda}
 
+\begin{scheda}{Il Clero}{The Clergy}{faz}%
+  {Il Frate Minore}{The Friar Minor}%
+  {Fra' Andrea da Caltagirone}%
+  {Non hai niente. Non vuoi niente. Per questo, tutti ti parlano.}
+\azioni{%
+  \azione{Aizzare}{1}\azione{Resistere}{1}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{1}\azione{Tramare}{0}\azione{Ingannare}{0}}{%
+  \azione{Agire}{0}\azione{Combattere}{0}\azione{Manovrare}{2}}{%
+  \azione{Comandare}{0}\azione{Persuadere}{2}\azione{Invocare}{1}}
+\risorse
+\donofardello{Povertà come scudo}%
+  {Non possiedi nulla. Sempre benvenuto in qualsiasi casa povera siciliana: entrare, dormire, mangiare, raccogliere informazioni nei quartieri popolari senza tiro.}%
+  {Il voto}%
+  {Non puoi possedere denaro, armi, oggetti di valore — anche se ti vengono offerti per la causa. Se devi maneggiarne uno: 1 Stress per atto.}
+\fondo{Il Frate Predicatore ti rispetta e ti disprezza in parti uguali. Voi due rappresentate due risposte diverse alla stessa domanda.}
+\end{scheda}
+
 %% ================================================================
 %% FAZIONE IV — POPOLO
 %% ================================================================
@@ -682,6 +733,23 @@
   {Il corpo}%
   {Sei vecchio. Agire e Combattere: sempre posizione Rischiosa, mai Controllata. Il corpo non segue più la testa.}
 \fondo{Il Ragazzo ti ricorda qualcuno. Non gli dici chi. Forse è per questo che gli vuoi bene.}
+\end{scheda}
+
+\begin{scheda}{Il Popolo}{The People}{faz}%
+  {L'Ostessa}{The Innkeeper}%
+  {Sabella d'Albergheria}%
+  {Servi vino acido a tutti — francesi, congiurati, soldati, predicatori. Ascolti tutto. Non dici niente. La porta sul retro non la chiudi mai.}
+\azioni{%
+  \azione{Aizzare}{1}\azione{Resistere}{1}\azione{Sfidare}{0}}{%
+  \azione{Studiare}{2}\azione{Tramare}{0}\azione{Ingannare}{1}}{%
+  \azione{Agire}{0}\azione{Combattere}{0}\azione{Manovrare}{1}}{%
+  \azione{Comandare}{0}\azione{Persuadere}{2}\azione{Invocare}{0}}
+\risorse
+\donofardello{La porta sul retro}%
+  {Una volta per scena: due personaggi (PG o PNG) che non si parlerebbero altrove si ritrovano al tuo tavolo di fondo, in posizione narrativamente neutra finché uno dei due non la rompe.}%
+  {Servi a tutti, alleata di nessuno}%
+  {Per restare aperta devi servire chiunque paghi. Se prendi posizione apertamente per una parte, l'altra può chiedere al GM di chiudere la taverna.}
+\fondo{L'Artigiano viene ogni giovedì sera. Ti deve tre mesi di vino. Ti ha sistemato la serratura del retro — che si apre con un grimaldello specifico. Lui non sa che tu lo sai.}
 \end{scheda}
 
 \end{document}

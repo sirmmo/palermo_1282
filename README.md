@@ -36,7 +36,7 @@ vespri1282/
 │   ├── app_rpgschema.tex        RDF/Turtle — rpg-schema.org
 │   └── app_ohm.tex              RDF/Turtle — OpenHistoryMap
 │
-└── schede_vespri.tex            28 schede personaggio A4
+└── schede_vespri.tex            32 schede personaggio A4 (8 per fazione)
 ```
 
 ## Compilazione
@@ -78,7 +78,7 @@ xelatex schede_vespri.tex && xelatex schede_vespri.tex
 | Glossario termini storici | — | ✓ |
 | App. rpg-schema.org (RDF) | shared | shared |
 | App. OpenHistoryMap (RDF) | shared | shared |
-| 28 schede personaggio A4 | standalone | standalone |
+| 32 schede personaggio A4 | standalone | standalone |
 
 ## Crediti
 
